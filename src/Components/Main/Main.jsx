@@ -12,6 +12,7 @@ const Main = () => {
 
     const ItemsRef = collection(db,"items")
     const [Items,setItems] = useState([]);
+    let navigate = useNavigate();
 
     useEffect(() => {
         fetchFlights();
@@ -23,6 +24,10 @@ const Main = () => {
         const data = await getDocs(ItemsRef) 
         setItems(data.docs.map((doc) => (doc.data())));
       }
+
+    const Order = async (des) => {
+        navigate("Order", { state: des });
+    };
 
     return (
         <section id='main' className='main section container'>
@@ -61,7 +66,7 @@ const Main = () => {
                 <div className="desc">
                <p>Description: {item.Description}</p>
               </div>
-                 <button className='btn flex'  >Order <HiClipboardList className="icon"/> </button>
+                <button className='btn flex'  onClick={() => Order(item)}>Order <HiClipboardList className="icon"/> </button>
                 </div>
               </div>
       
