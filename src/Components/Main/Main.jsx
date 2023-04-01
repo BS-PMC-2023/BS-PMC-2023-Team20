@@ -1,10 +1,36 @@
+import React, {useEffect,useState} from 'react'
 import './Main.css'
-
+import {HiOutlineLocationMarker} from 'react-icons/hi'
+import {HiClipboardList} from 'react-icons/hi'
+import Aos from 'aos'
+import 'aos/dist/aos.css'
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from '../../firebase-config'
+import { useNavigate } from 'react-router-dom'
 
 const Main = () => {
+
+    const ItemsRef = collection(db,"items")
+    const [Items,setItems] = useState([]);
+
+    useEffect(() => {
+        fetchFlights();
+        Aos.init({duration: 4000})
+      }, [])
+
+      async function fetchFlights(){
+
+        const data = await getDocs(ItemsRef) 
+        setItems(data.docs.map((doc) => (doc.data())));
+      }
+    
     return (
-<section id='Main'  className='Main'>
-        
+        <section id='main' className='main section container'>
+        <div className="secTitle">
+          <h3 className="title">
+            Available items
+          </h3>
+        </div>        
 </section>
 
 )
