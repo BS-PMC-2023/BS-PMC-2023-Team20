@@ -4,7 +4,7 @@ import React from "react";
 import Navbar from './Components/Navbar/Navbar';
 import Home from './Components/Home/Home';
 import Footer from './Components/Footer/Footer';
-import {BrowserRouter as Router, Route , Switch } from 'react-router-dom';
+import {BrowserRouter as Router, Route , Routes } from 'react-router-dom';
 import Singup from './Components/Singup/Singup';
 import Singin from './Components/Singin/Singin';
 
@@ -15,20 +15,14 @@ function App() {
     <>
     <Navbar/>
     <div className = 'content'>
-      <Switch>
-        <Route exact path="/">
-          <Home/>       
-        </Route>
+      <Routes>
+        <Route path="/" element={<Home />} />     
 
-        <Route path="/Sing-up">
-          <Singup/>
-        </Route>
+        <Route path="/Sing-up" element={<Singup />} />     
 
-        <Route path="/Sing-in">
-          <Singin/>
-        </Route>
+        <Route path="/Sing-in" element={<Singin />} />     
 
-      </Switch>
+      </Routes>
     </div>
     <Footer/>
     </>
