@@ -41,7 +41,9 @@ const Navbar = () => {
                         <li className="navItem">
                         <a href="/" className="navLink">Home</a>
                         </li>
-                        
+                        <li className="navItem">
+                        <a href="/Sing-up" className="navLink">Signup</a>
+                        </li>
                         {user && userData == 'admin' &&
                         <li className="navItem">
                             <a href="admin" className="navLink">admin</a>
