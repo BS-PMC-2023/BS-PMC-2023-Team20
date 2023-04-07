@@ -15,18 +15,18 @@ const Main = () => {
     let navigate = useNavigate();
 
     useEffect(() => {
-        fetchFlights();
+        fetchItems();
         Aos.init({duration: 4000})
       }, [])
 
-      async function fetchFlights(){
+      async function fetchItems(){
 
         const data = await getDocs(ItemsRef) 
         setItems(data.docs.map((doc) => (doc.data())));
       }
 
-    const Order = async (des) => {
-        navigate("Order", { state: des });
+    const Order = async (item) => {
+        navigate("Order", { state: item });
     };
 
     return (
