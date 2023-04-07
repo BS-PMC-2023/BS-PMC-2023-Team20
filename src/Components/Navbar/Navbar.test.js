@@ -1,6 +1,5 @@
 import {render, screen,fireEvent} from '@testing-library/react'
 import user from '@testing-library/user-event'
-import Navbar from './Navbar.jsx'
 import App from '../../App.js'
 
 test('its render specific page when the myorder clicking', () =>{
