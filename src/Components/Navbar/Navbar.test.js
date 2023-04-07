@@ -1,5 +1,6 @@
 import {render, screen,fireEvent} from '@testing-library/react'
 import App from '../../App.js'
+import '@testing-library/jest-dom'
 
 test('its render specific page when the myorder clicking', () =>{
     //render the component 
@@ -42,5 +43,21 @@ test('its render specific page when the Home clicking',() =>{
     fireEvent.click(Home);
     expect(window.location.pathname).toBe('/');
     
+   }
+)
+
+test('its check if the logo is exist and render to the right page',() =>{
+    //render the component 
+    render(<App/>);
+    //find the MyOrders button
+    const logoElement = screen.getByTestId('logo');
+    //check if the logo is exsit
+    expect(logoElement).toBeInTheDocument();
+ 
+    //Simulate clicking the button
+    fireEvent.click(logoElement);
+    //checks if its render to the right page
+    expect(window.location.pathname).toBe('/');
+
    }
 )
