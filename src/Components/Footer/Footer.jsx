@@ -35,8 +35,8 @@ const Footer = () => {
           </div>
 
           <div data-aos="fade-up" data-aos-duration="3000"  className="footerSocials flex">       
-          <AiFillYoutube className="icon"/>
-          <AiFillInstagram className="icon"/>
+          <a href="https://www.youtube.com/@scebsc" target="_blank" rel="noopener noreferrer"><AiFillYoutube className="icon" /></a>
+          <a href="https://www.instagram.com/sce.academy/" target="_blank" rel="noopener noreferrer"><AiFillInstagram className="icon" /></a>
           </div>
 
          </div>
