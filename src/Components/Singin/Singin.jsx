@@ -49,6 +49,7 @@ const Singin = () => {
         snackbarRef.current.show();
     }
     };
+    
 
   return (
     <section id='Sing-in' className='Sing-in'>
@@ -89,10 +90,14 @@ const Singin = () => {
           <div className="submit flex">
            <AiOutlineFileDone className="icon"/>
            <span type="submit" onClick={login} >Submit</span>
-           
           </div>
+          <div className="password-container">
+            <p class="reset-message">If you forgot your password click </p>
+            <button className="forgot-password" onClick={forgotPassword}>here</button>
+          </div>
+          
+          
         </from>
-
       </div>
     </section>
   )
