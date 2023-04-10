@@ -16,6 +16,7 @@ import { auth, db } from "../../firebase-config";
 
 import { useRef } from "react";
 import { doc, getDoc } from 'firebase/firestore';
+import { sendPasswordResetEmail } from "firebase/auth";
   
 
 const Singin = () => {
@@ -48,6 +49,16 @@ const Singin = () => {
         alert("Error somthing went wrong please try again"+error.message); 
         snackbarRef.current.show();
     }
+    };
+    const forgotPassword = async () => {
+      try {
+        await sendPasswordResetEmail(auth, loginEmail);
+        alert("Password reset email sent. Please check your inbox.");
+      } catch (error) {
+        console.log(error.message);
+        alert("Error something went wrong please try again." + error.message);
+        snackbarRef.current.show();
+      }
     };
     
 
