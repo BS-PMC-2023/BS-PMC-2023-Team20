@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import './singin.css'
+import './Singin.css'
 import video from "../../Assets/video3.mp4";
 import {BiUserCircle} from 'react-icons/bi'
 import {RiLockPasswordFill} from 'react-icons/ri'
