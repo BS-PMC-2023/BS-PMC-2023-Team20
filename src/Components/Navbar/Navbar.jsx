@@ -39,7 +39,7 @@ const Navbar = () => {
                     <ul onClick={removeNavbar} className="navLists flex">
 
                         <li className="navItem">
-                        <a href="/" className="navLink">Home</a>
+                            <Link  to="/" className="navLink">Home</Link>
                         </li>
                         <li className="navItem">
                         <a href="/Sing-up" className="navLink">Signup</a>
@@ -49,12 +49,12 @@ const Navbar = () => {
                         </li>
                         {user && userData == 'admin' &&
                         <li className="navItem">
-                            <a href="admin" className="navLink">admin</a>
+                            <Link  to="admin" className="navLink">admin</Link>
                         </li>}
 
                        
                         <li className="navItem">
-                            <a href="Myorders" className="navLink">My Orders</a>
+                            <Link  to="Myorders" className="navLink">My Orders</Link>
                         </li>
 
                     </ul>
