@@ -295,4 +295,26 @@
     .home .homeContent .cardDiv .searchOptions span {
       font-size: 17px;
     }
+    .password-container {
+      background-color: white;
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    
+    .password-container .forgot-password {
+      margin-left: auto;
+      background-color: white;
+      border: none;
+
+    }
+    .reset-message {
+      color: black;
+    }
   }/*# sourceMappingURL=singin.css.map */
