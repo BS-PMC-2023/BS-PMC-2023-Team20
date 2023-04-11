@@ -5,6 +5,9 @@ import { AiFillCloseCircle } from "react-icons/ai"
 import { TbGridDots } from "react-icons/tb"
 import { useState } from 'react';
 import { fetchUserData } from '../../utils/fetchLocalStorageData';
+import { auth } from "../../firebase-config";
+import { useAuthState } from "react-firebase-hooks/auth";
+
 
 const Navbar = () => {
     const [active, setActive] = useState('navBar')
@@ -19,7 +22,7 @@ const Navbar = () => {
         setActive('navBar')
     }
 
-    const [user, loading] = useState('admin');
+    const [user, loading] = useAuthState(auth);
 
     var userData=null;
     if (user)
