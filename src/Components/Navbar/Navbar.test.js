@@ -1,48 +1,48 @@
-import {render, screen,fireEvent} from '@testing-library/react'
-import user from '@testing-library/user-event'
-import Navbar from './Navbar.jsx'
-import App from '../../App.js'
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from '@cfaester/enzyme-adapter-react-18';
+import Navbar from './Navbar';
 
-test('its render specific page when the myorder clicking', () =>{
-    //render the component 
-    render(<App/>);
-    //find the MyOrders button
-    const MyOrders= screen.getByRole('link',{ name: /My Orders/i });
-    //Simulate clicking the button
-    fireEvent.click(MyOrders);
-    expect(window.location.pathname).toBe('/Myorders');
+Enzyme.configure({ adapter: new Adapter() });
+
+describe('Navbar component when user is not logged in', () => {
+    let wrapper;
+    beforeEach(() => {
+    wrapper = shallow(<Navbar />);
+    });
     
-
-    //find the admin button
-    const admin= screen.getByRole('link',{ name: /admin/i });
-    //Simulate clicking the button
-    fireEvent.click(admin);
-    expect(window.location.pathname).toBe('/admin');
-
+    it('renders a Sign-in button', () => {
+    expect(wrapper.find('Link[to="/Sing-in"]').text()).toEqual('Sing-in');
+    });
     
-    }
-)
-
-test('its render specific page when the admin clicking',() =>{
-     //render the component 
-     render(<App/>);
-     //find the MyOrders button
-     const admin= screen.getByRole('link',{ name: /admin/i });
-     //Simulate clicking the button
-     fireEvent.click(admin);
-     expect(window.location.pathname).toBe('/admin');
-     
-    }
-)
-
-test('its render specific page when the Home clicking',() =>{
-    //render the component 
-    render(<App/>);
-    //find the MyOrders button
-    const Home= screen.getByRole('link',{ name: /Home/i });
-    //Simulate clicking the button
-    fireEvent.click(Home);
-    expect(window.location.pathname).toBe('/');
+    it('renders a Sign-up button', () => {
+    expect(wrapper.find('Link[to="/Sing-up"]').text()).toEqual('Sing-up');
+    });
     
-   }
-)
+    it('does not render My Orders link', () => {
+    expect(wrapper.find('a[href="Myorders"]').exists()).toBeFalsy();
+    });
+    
+    it('does not render admin link', () => {
+    expect(wrapper.find('a[href="admin"]').exists()).toBeFalsy();
+    });
+    
+    it('displays correct logo text', () => {
+    expect(wrapper.find('h1').text()).toEqual('Warehouse.');
+    });
+    
+    it('toggles navbar when toggleNavbar button is clicked', () => {
+    const toggleNavbarBtn = wrapper.find('.toggleNavbar');
+    toggleNavbarBtn.simulate('click');
+    expect(wrapper.find('.navBar.activeNavbar').exists()).toBeTruthy();
+    });
+    
+    it('closes navbar when closeNavbar button is clicked', () => {
+    const toggleNavbarBtn = wrapper.find('.toggleNavbar');
+    toggleNavbarBtn.simulate('click');
+    const closeNavbarBtn = wrapper.find('.closeNavbar');
+    closeNavbarBtn.simulate('click');
+    expect(wrapper.find('.navBar').exists()).toBeTruthy();
+    });
+    });
+
+
