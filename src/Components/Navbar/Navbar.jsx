@@ -7,6 +7,9 @@ import { useState } from 'react';
 import { fetchUserData } from '../../utils/fetchLocalStorageData';
 import { auth } from "../../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
+import {
+    signOut
+  } from "firebase/auth";
 
 
 const Navbar = () => {
@@ -27,6 +30,12 @@ const Navbar = () => {
     var userData=null;
     if (user)
         userData = fetchUserData();
+
+    const logout = async () => {
+        await signOut(auth);
+        localStorage.clear();
+        window.location.reload(false);
+    };
 
     return (
         <section id='Navbar'  className='Navbar'>
@@ -56,7 +65,11 @@ const Navbar = () => {
                                 <li className="navItem">
                                     <a> Hello: {userData.FirstName}</a>
                                 </li>
-                            </>
+                                <button className="btn"
+                                    onClick={logout}> Log out
+                                </button>
+                                </>
+                            
                         ):(
                             <>
                             <button className="btn">
