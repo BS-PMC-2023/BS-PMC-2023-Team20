@@ -1,9 +1,11 @@
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from '@cfaester/enzyme-adapter-react-18';
 import Navbar from './Navbar';
+import React from 'react';
 
 Enzyme.configure({ adapter: new Adapter() });
 
+// when user is not logged in
 describe('Navbar component when user is not logged in', () => {
     let wrapper;
     beforeEach(() => {
@@ -46,3 +48,22 @@ describe('Navbar component when user is not logged in', () => {
     });
 
 
+// check when user is logged on and check if there is logout button ( check for the log-out function + button )
+describe('Navbar', () => {
+    it('does not render a Logout button when user is not logged in', () => {
+      const wrapper = shallow(<Navbar />);
+      expect(wrapper.find('button.btn').length).toEqual(2);
+      expect(wrapper.find('button.btn').at(0).text()).toEqual('Sing-in');
+      expect(wrapper.find('button.btn').at(1).text()).toEqual('Sing-up');
+      expect(wrapper.find('Link[to="/Logout"]').length).toEqual(0);
+    });
+  
+    it('renders a Login button when user is not logged in', () => {
+        const wrapper = shallow(<Navbar />);
+        jest.spyOn(React, 'useState').mockReturnValueOnce([null, false]);
+        expect(wrapper.find('button.btn').length).toEqual(2);
+        expect(wrapper.find('button.btn').at(0).text()).toEqual('Sing-in');
+        expect(wrapper.find('button.btn').at(1).text()).toEqual('Sing-up');
+        expect(wrapper.find('Link[to="/Logout"]').length).toEqual(0);
+      });
+  });
