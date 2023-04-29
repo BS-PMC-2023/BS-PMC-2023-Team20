@@ -4,6 +4,9 @@ import Navbar from './Navbar';
 import React from 'react';
 
 Enzyme.configure({ adapter: new Adapter() });
+import {render, screen,fireEvent} from '@testing-library/react'
+import App from '../../App.js'
+import '@testing-library/jest-dom'
 
 // when user is not logged in
 describe('Navbar component when user is not logged in', () => {

@@ -103,10 +103,8 @@ const Singin = () => {
            <span type="submit" onClick={login} >Submit</span>
           </div>
           <div className="password-container">
-            <p class="reset-message">If you forgot your password </p>
-            <p class="reset-message">enter your email</p>
-            <p class="reset-message"> and click </p>
-            <button className="forgot-password" onClick={forgotPassword}>here</button>
+            <label>If you forgot your password enter your email and click </label>
+            <span type="submit" className="forgot-password" onClick={forgotPassword}>here</span>
           </div>
           
           

@@ -15,7 +15,11 @@ const Home = () => {
     
         <><section id='home' className='home'>
           <div className="overlay"></div>
-          <video src={video} autoPlay loop muted type="video/mp4"></video>
+          
+          <video className="background-video" autoPlay muted loop data-testid="video">
+            <source src={video} type="video/mp4"/>
+          </video>
+
           <div data-aos="fade-down" className="homeContent container">
             <div className="textDiv">
               <span className="smallText">
