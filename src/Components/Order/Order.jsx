@@ -124,7 +124,11 @@ const Order = () => {
                   <input type="date" value={ReturnDate} min={FromDate} onChange={(event) => { setReturnDate(event.target.value); } } />
                 </div>
               </div>
-               
+              {FromDate && ReturnDate && (
+                <div>
+                    <p>Number of rent days: {Math.ceil((new Date(ReturnDate) - new Date(FromDate)) / (1000 * 60 * 60 * 24))}</p>
+                </div>
+                )}
                 </form>             
               <button  className="btn">
               <a onClick={ () => {  
