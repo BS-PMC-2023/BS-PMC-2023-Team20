@@ -1,63 +1,72 @@
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from '@cfaester/enzyme-adapter-react-18';
+import Navbar from './Navbar';
+import React from 'react';
+
+Enzyme.configure({ adapter: new Adapter() });
 import {render, screen,fireEvent} from '@testing-library/react'
 import App from '../../App.js'
 import '@testing-library/jest-dom'
 
-test('its render specific page when the myorder clicking', () =>{
-    //render the component 
-    render(<App/>);
-    //find the MyOrders button
-    const MyOrders= screen.getByRole('link',{ name: /My Orders/i });
-    //Simulate clicking the button
-    fireEvent.click(MyOrders);
-    expect(window.location.pathname).toBe('/Myorders');
+// when user is not logged in
+describe('Navbar component when user is not logged in', () => {
+    let wrapper;
+    beforeEach(() => {
+    wrapper = shallow(<Navbar />);
+    });
     
-
-    //find the admin button
-    const admin= screen.getByRole('link',{ name: /admin/i });
-    //Simulate clicking the button
-    fireEvent.click(admin);
-    expect(window.location.pathname).toBe('/admin');
-
+    it('renders a Sign-in button', () => {
+    expect(wrapper.find('Link[to="/Sing-in"]').text()).toEqual('Sing-in');
+    });
     
-    }
-)
-
-test('its render specific page when the admin clicking',() =>{
-     //render the component 
-     render(<App/>);
-     //find the MyOrders button
-     const admin= screen.getByRole('link',{ name: /admin/i });
-     //Simulate clicking the button
-     fireEvent.click(admin);
-     expect(window.location.pathname).toBe('/admin');
-     
-    }
-)
-
-test('its render specific page when the Home clicking',() =>{
-    //render the component 
-    render(<App/>);
-    //find the MyOrders button
-    const Home= screen.getByRole('link',{ name: /Home/i });
-    //Simulate clicking the button
-    fireEvent.click(Home);
-    expect(window.location.pathname).toBe('/');
+    it('renders a Sign-up button', () => {
+    expect(wrapper.find('Link[to="/Sing-up"]').text()).toEqual('Sing-up');
+    });
     
-   }
-)
+    it('does not render My Orders link', () => {
+    expect(wrapper.find('a[href="Myorders"]').exists()).toBeFalsy();
+    });
+    
+    it('does not render admin link', () => {
+    expect(wrapper.find('a[href="admin"]').exists()).toBeFalsy();
+    });
+    
+    it('displays correct logo text', () => {
+    expect(wrapper.find('h1').text()).toEqual('Warehouse.');
+    });
+    
+    it('toggles navbar when toggleNavbar button is clicked', () => {
+    const toggleNavbarBtn = wrapper.find('.toggleNavbar');
+    toggleNavbarBtn.simulate('click');
+    expect(wrapper.find('.navBar.activeNavbar').exists()).toBeTruthy();
+    });
+    
+    it('closes navbar when closeNavbar button is clicked', () => {
+    const toggleNavbarBtn = wrapper.find('.toggleNavbar');
+    toggleNavbarBtn.simulate('click');
+    const closeNavbarBtn = wrapper.find('.closeNavbar');
+    closeNavbarBtn.simulate('click');
+    expect(wrapper.find('.navBar').exists()).toBeTruthy();
+    });
+    });
 
-test('its check if the logo is exist and render to the right page',() =>{
-    //render the component 
-    render(<App/>);
-    //find the MyOrders button
-    const logoElement = screen.getByTestId('logo');
-    //check if the logo is exsit
-    expect(logoElement).toBeInTheDocument();
- 
-    //Simulate clicking the button
-    fireEvent.click(logoElement);
-    //checks if its render to the right page
-    expect(window.location.pathname).toBe('/');
 
-   }
-)
+// check when user is logged on and check if there is logout button ( check for the log-out function + button )
+describe('Navbar', () => {
+    it('does not render a Logout button when user is not logged in', () => {
+      const wrapper = shallow(<Navbar />);
+      expect(wrapper.find('button.btn').length).toEqual(2);
+      expect(wrapper.find('button.btn').at(0).text()).toEqual('Sing-in');
+      expect(wrapper.find('button.btn').at(1).text()).toEqual('Sing-up');
+      expect(wrapper.find('Link[to="/Logout"]').length).toEqual(0);
+    });
+  
+    it('renders a Login button when user is not logged in', () => {
+        const wrapper = shallow(<Navbar />);
+        jest.spyOn(React, 'useState').mockReturnValueOnce([null, false]);
+        expect(wrapper.find('button.btn').length).toEqual(2);
+        expect(wrapper.find('button.btn').at(0).text()).toEqual('Sing-in');
+        expect(wrapper.find('button.btn').at(1).text()).toEqual('Sing-up');
+        expect(wrapper.find('Link[to="/Logout"]').length).toEqual(0);
+      });
+  });

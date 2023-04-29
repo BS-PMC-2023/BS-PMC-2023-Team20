@@ -76,7 +76,7 @@ const Singup = () => {
         </h1>
         </div>
 
-        <from data-aos="fade-down" className="cardDiv grid" onSubmit = {register}>
+        <form data-aos="fade-down" className="cardDiv grid" onSubmit = {register}>
 
           <div className="emailInput">
             <label htmlFor="emailName">Enter your email:</label>
@@ -133,7 +133,7 @@ const Singup = () => {
            <span type="submit" onClick={register} >Submit</span>
           </div>
 
-        </from>
+        </form>
       </div>
     </section>
   )
