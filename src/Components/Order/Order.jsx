@@ -49,11 +49,41 @@ const Order = () => {
                   <p>Description: {item.Description}</p>
                   </div>
   
+  
+          <div >         
+            <div>
+                <form className="card-form">
+                <div className="form-group ">
+                <div className="DepartInput">
+              <label htmlFor="date">From:</label>
+              <div className="input flex">
+                <input type="date" value={FromDate} onChange={(event) => { setFromDate(event.target.value); } } />
+              </div>
+            </div>   
                   </div>
-                  </div>
-
-
+  
+                  <div className="ReturnInput">
+                <label htmlFor="date">Return:</label>
+                <div className="input flex">
+                  <input type="date" value={ReturnDate} onChange={(event) => { setReturnDate(event.target.value); } } />
+                </div>
+              </div>
+               
+                </form>
+  
+                  
+              <button  className="btn">
+              <a onClick={ () => {  
+                
+                }}>Submit</a> 
+            </button> 
+        </div>
+                  </div>              
+            </div>
+          </div>
+         
       </section>
+      
 
 )
   
