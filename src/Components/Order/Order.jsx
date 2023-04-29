@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import Aos from 'aos'
 import { auth } from "../../firebase-config";
+import {HiOutlineLocationMarker} from 'react-icons/hi'
+
 
 
 const Order = () => {
@@ -20,9 +22,15 @@ const Order = () => {
 
 
     return (
-<section id='Order'  className='Order'>
-        
-</section>
+        <section id='main' className='main section container'>
+        <div className="secTitle">
+          <h3 className="title">
+            Order item now
+          </h3>
+        </div>
+  
+         
+      </section>
 
 )
   
