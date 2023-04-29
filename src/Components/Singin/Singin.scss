@@ -149,15 +149,13 @@
         }
         .password-container{
             display: block;
-            color: var(--textColor);
+            color:hsl(240, 4%, 36%);  
             position:relative;
             font-size: 13px;
             font-weight: 500;
-
-           
         }
          .forgot-password{
-            color: var(--whiteColor);
+            color:hsl(240, 4%, 36%);
             position: absolute;
             background: var(--gradientColor);
             bottom: -1.5rem;
@@ -203,7 +201,7 @@
 
             Label{
                 display: block;
-                color: var(--textColor);
+                color:hsl(240, 4%, 36%);
                 padding-bottom: 10px;
                 font-size: 13px;
                 font-weight: 500;

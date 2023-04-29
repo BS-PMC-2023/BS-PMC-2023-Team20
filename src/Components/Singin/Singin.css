@@ -138,13 +138,13 @@
 }
 .Sing-in .Sing-inContent .password-container {
   display: block;
-  color: var(--textColor);
+  color: hsl(240, 4%, 36%);
   position: relative;
   font-size: 13px;
   font-weight: 500;
 }
 .Sing-in .Sing-inContent .forgot-password {
-  color: var(--whiteColor);
+  color: hsl(240, 4%, 36%);
   position: absolute;
   background: var(--gradientColor);
   bottom: -1.5rem;
@@ -187,7 +187,7 @@
 }
 .Sing-in .Sing-inContent .cardDiv Label {
   display: block;
-  color: var(--textColor);
+  color: hsl(240, 4%, 36%);
   padding-bottom: 10px;
   font-size: 13px;
   font-weight: 500;

@@ -8,9 +8,21 @@ import {BrowserRouter as Router, Route , Routes } from 'react-router-dom';
 import Singup from './Components/Singup/Singup';
 import Singin from './Components/Singin/Singin';
 import Order from './Components/Order/Order';
-
+import Admin from './Components/Admin/Admin'
+import ProtectedRoute from './Permissions/ProtectedRoute';
+import { fetchUserData } from './utils/fetchLocalStorageData';
 
 function App() {
+
+  var userData = fetchUserData();
+  var adminState=false;
+
+  if (userData)
+  {
+    if(userData.userRoles.includes('admin'))
+    adminState=true;
+  }
+
   return (
     <Router>
     <>
@@ -25,6 +37,9 @@ function App() {
 
         <Route path="Order" element={<Order />} />
 
+        <Route element={<ProtectedRoute user={adminState} />}>
+          <Route path="Admin" element={<Admin />} />
+        </Route>
 
       </Routes>
     </div>
