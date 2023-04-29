@@ -4,62 +4,84 @@ import {Link} from 'react-router-dom'
 import { AiFillCloseCircle } from "react-icons/ai"
 import { TbGridDots } from "react-icons/tb"
 import { useState } from 'react';
+import { fetchUserData } from '../../utils/fetchLocalStorageData';
+import { auth } from "../../firebase-config";
+import { useAuthState } from "react-firebase-hooks/auth";
+import {
+    signOut
+  } from "firebase/auth";
+
 
 const Navbar = () => {
     const [active, setActive] = useState('navBar')
-
 
     //function to toggle navbar
     const showNav = () => {
         setActive('navBar activeNavbar')
     }
+
     //function to remove navbar
     const removeNavbar = () => {
         setActive('navBar')
     }
 
-    const [user, loading] = useState('admin');
-
+    const [user, loading] = useAuthState(auth);
 
     var userData=null;
-    userData = 'admin';
+    if (user)
+        userData = fetchUserData();
 
-
- 
+    const logout = async () => {
+        await signOut(auth);
+        localStorage.clear();
+        window.location.reload(false);
+    };
 
     return (
-<section id='Navbar'  className='Navbar'>
-    <header className="header flex">
-        <div className="logoDiv">
-            <Link to="/" className="logo">
-                    <h1><SCEicon className="icon" />Warehouse.</h1>
-            </Link>
-        </div>
-        <div className={active}>
+        <section id='Navbar'  className='Navbar'>
+            <header className="header flex">
+                <div className="logoDiv">
+                    <Link to="/" className="logo">
+                            <h1><SCEicon className="icon" />Warehouse.</h1>
+                    </Link>
+                </div>
+                <div className={active}>
                     <ul onClick={removeNavbar} className="navLists flex">
 
                         <li className="navItem">
-                            <Link  to="/" className="navLink">Home</Link>
+                            <a href="/" className="navLink">Home</a>
                         </li>
+
+                        {user && userData.userRoles.includes('admin') &&
                         <li className="navItem">
-                        <a href="/Sing-up" className="navLink">Signup</a>
-                        </li>
-                        <li className="navItem">
-                        <a href="/Sing-in" className="navLink">SignIn</a>
-                        </li>
-                        {user && userData == 'admin' &&
-                        <li className="navItem">
-                            <Link  to="admin" className="navLink">admin</Link>
+                            <a href="admin" className="navLink">admin</a>
                         </li>}
 
-                       
-                        <li className="navItem">
-                            <Link  to="Myorders" className="navLink">My Orders</Link>
-                        </li>
+                        {user ? (
+                            <>
+                                <li className="navItem">
+                                    <a href="Myorders" className="navLink">My Orders</a>
+                                </li>
+                                <li className="navItem">
+                                    <a> Hello: {userData.FirstName}</a>
+                                </li>
+                                <button className="btn"
+                                    onClick={logout}> Log out
+                                </button>
+                                </>
+                            
+                        ):(
+                            <>
+                            <button className="btn">
+                                <Link to="/Sing-in">Sing-in</Link>
+                            </button>
+
+                            <button className="btn">
+                                <Link to="/Sing-up">Sing-up</Link>
+                            </button></>
+                        )}
 
                     </ul>
-
-
                     <div onClick={removeNavbar} className="closeNavbar">
                         <AiFillCloseCircle className="icon" />
                     </div>
@@ -68,12 +90,9 @@ const Navbar = () => {
                 <div onClick={showNav} className="toggleNavbar">
                     <TbGridDots className="icon" />
                 </div>
-    </header>
-
-
-
-</section>
-)
+            </header>
+        </section>
+    )
 }
 
 export default Navbar

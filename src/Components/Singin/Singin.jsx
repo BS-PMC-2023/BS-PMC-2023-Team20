@@ -77,7 +77,7 @@ const Singin = () => {
         </h1>
         </div>
 
-        <from data-aos="fade-down" className="cardDiv grid" onSubmit = {login}>
+        <form data-aos="fade-down" className="cardDiv grid" onSubmit = {login}>
 
           <div className="emailInput">
             <label htmlFor="emailName">Enter your email:</label>
@@ -110,7 +110,7 @@ const Singin = () => {
           </div>
           
           
-        </from>
+        </form>
       </div>
     </section>
   )
