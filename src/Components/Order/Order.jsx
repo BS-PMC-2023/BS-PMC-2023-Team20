@@ -29,7 +29,30 @@ const Order = () => {
           </h3>
         </div>
   
-         
+        <div className="secContent grid">        
+                  <div className="imageDiv">
+                  <img src={item.ImageUrl} alt="" />
+                  </div>
+      
+                <div className="cardInfo">
+                  <h4 className="Title"> {item.ItemType}</h4>
+                  <span className="continent flex">
+                    <HiOutlineLocationMarker className="icon"/>
+                    <span className="name">Location: {item.Location}</span>
+                  </span>
+  
+                  <div className="Sirel">
+                  <p>Serial: {item.Serial}</p>
+                  </div>
+        
+                  <div className="desc">
+                  <p>Description: {item.Description}</p>
+                  </div>
+  
+                  </div>
+                  </div>
+
+
       </section>
 
 )
