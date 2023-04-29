@@ -20,6 +20,11 @@ const Order = () => {
     console.log(item)
     }, [user])
 
+    let navigate = useNavigate();
+
+    const handleSubmit = async () => {
+        navigate("/Myorders");
+    }
 
     return (
         <section id='main' className='main section container'>
@@ -74,7 +79,7 @@ const Order = () => {
                   
               <button  className="btn">
               <a onClick={ () => {  
-                
+                handleSubmit();
                 }}>Submit</a> 
             </button> 
         </div>
