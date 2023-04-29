@@ -68,6 +68,15 @@ const Order = () => {
         navigate("/Myorders");
       }
 
+      const disableDates=()=>{
+        var today,dd,mm,yyyy;
+        today=new Date();
+        dd=today.getDate()+1;
+        mm=today.getMonth()+1;
+        yyyy=today.getFullYear();
+        return yyyy+"-"+mm+"-"+dd;
+      }
+
     return (
          <section id='main' className='main section container'>
     <div className="secTitle">
@@ -104,7 +113,7 @@ const Order = () => {
                 <div className="DepartInput">
               <label htmlFor="date">From:</label>
               <div className="input flex">
-                <input type="date" value={FromDate} onChange={(event) => { setFromDate(event.target.value); } } />
+              <input type="date" value={FromDate} min={new Date().toISOString().slice(0,10)} onChange={(event) => { setFromDate(event.target.value); } } />
               </div>
             </div>   
                   </div>
@@ -112,7 +121,7 @@ const Order = () => {
                   <div className="ReturnInput">
                 <label htmlFor="date">Return:</label>
                 <div className="input flex">
-                  <input type="date" value={ReturnDate} onChange={(event) => { setReturnDate(event.target.value); } } />
+                  <input type="date" value={ReturnDate} min={FromDate} onChange={(event) => { setReturnDate(event.target.value); } } />
                 </div>
               </div>
                
