@@ -175,16 +175,23 @@ const Order = () => {
                   </div>
                 )}
               </form>
-              <label className="checkbox-container">
-                <input
-                  type="checkbox"
-                  checked={isChecked}
-                  onChange={handleCheckboxChange}
-                />
-                <p onClick={handleCheckboxClick}>
-                  I agree to the terms and conditions.
-                </p>
-              </label>
+              <div className="checkbox-container">
+  <label htmlFor="terms-checkbox">
+    <input
+      id="terms-checkbox"
+      type="checkbox"
+      checked={isChecked}
+      onChange={handleCheckboxChange}
+    />
+    <span></span>
+  </label>
+  <p onClick={handleCheckboxClick}>
+    I agree to the terms and conditions.
+  </p>
+</div>
+
+
+
 
               <header className="header flex">
                 <div className={active}>
