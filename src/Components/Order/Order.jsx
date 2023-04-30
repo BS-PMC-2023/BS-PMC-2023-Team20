@@ -14,6 +14,7 @@ import {
 } from "firebase/firestore";
 import { uid } from "uid";
 import { db } from "../../firebase-config";
+import { AiFillCloseCircle } from 'react-icons/ai'
 
 import Terms from "../Terms/Terms";
 
@@ -47,6 +48,11 @@ const Order = () => {
     } else if (numClicks === 1) {
       removeTerms();
     }
+  }
+
+ //function to remove addbar
+  const removeaddbar = () => {
+    setActive('addBar')
   }
 
   useEffect(() => {
@@ -196,7 +202,11 @@ const Order = () => {
               <header className="header flex">
                 <div className={active}>
                   <Terms />
+                  <div onClick={removeTerms} className="closetems">
+                  <AiFillCloseCircle className="icon" />
+                </div>  
                 </div>
+                
               </header>
               <div>
                 <button className="btn">

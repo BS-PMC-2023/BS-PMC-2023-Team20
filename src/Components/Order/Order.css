@@ -25,48 +25,42 @@
   z-index: 1000;
   padding: 2rem;
 }
+:root .main .header .closetems {
+  cursor: pointer;
+  position: absolute;
+  top: 2rem;
+  right: 2.5rem;
+  color: var(--PrimaryColor);
+}
+:root .main .header .closetems:hover .icon {
+  color: var(--SecondaryColor);
+}
 :root .main .header .TermsBar {
   background: var(--whiteColor);
   position: absolute;
   height: -moz-fit-content;
   height: fit-content;
-  width: 100%;
-  border-radius: 1rem;
+  width: 140%;
+  border-radius: 4rem;
   padding: 2rem;
   top: -3000%;
-  left: 150%;
+  left: 70%;
   transform: translate(-50%);
   z-index: 2000;
   box-shadow: 0 2px 4px rgba(2, 15, 29, 0.904);
   transition: 0.3s ease-in-out;
 }
-:root .main .header .TermsBar .addLists {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  align-items: center;
-  margin: auto;
-  padding: 0.5rem 0;
-}
-:root .main .header .TermsBar .addLists .btn {
-  margin-top: 1rem;
-}
-:root .main .header .TermsBar .addLists .btn a {
-  font-weight: 600;
-  color: var(--whiteColor);
-}
 :root .main .header .TermsBar .closeTermsbar {
   position: absolute;
-  top: 1rem;
-  right: 1.5rem;
+  top: 2rem;
+  right: 3rem;
   color: var(--PrimaryColor);
 }
 :root .main .header .TermsBar .closeTermsbar:hover .icon {
   color: var(--SecondaryColor);
 }
 :root .main .header .activeTermsbar {
-  top: -10rem;
+  top: -30rem;
 }
 :root .main .checkbox-container {
   display: flex;
