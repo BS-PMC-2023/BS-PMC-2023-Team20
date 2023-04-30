@@ -60,6 +60,11 @@ const Order = () => {
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const handleSubmit = async () => {
+    if (isChecked === false) 
+    {
+      alert("Please accept the terms and conditions");
+      return;
+    }
     const getuser = doc(db, "users", user.uid);
     const data = await getDoc(getuser);
     var userData = data.data();
