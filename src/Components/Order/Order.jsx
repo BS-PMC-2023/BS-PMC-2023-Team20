@@ -24,15 +24,15 @@ const Order = () => {
   const [ReturnDate, setReturnDate] = useState("");
   const [isChecked, setIsChecked] = useState(false);
 
-  const [active, setActive] = useState("addBar");
-  const showadd = () => {
+  const [active, setActive] = useState("TermsBar");
+  const showTerms = () => {
     setNumClicks(numClicks + 1);
-    setActive("addBar activeaddbar");
+    setActive("TermsBar activeTermsbar");
   };
   //function to remove addbar
-  const removeaddbar = () => {
+  const removeTerms = () => {
     setNumClicks(0);
-    setActive("addBar");
+    setActive("TermsBar");
   };
 
   const [numClicks, setNumClicks] = useState(0);
@@ -43,9 +43,9 @@ const Order = () => {
 
   function handleCheckboxClick() {
     if (numClicks === 0) {
-      showadd();
+      showTerms();
     } else if (numClicks === 1) {
-      removeaddbar();
+      removeTerms();
     }
   }
 

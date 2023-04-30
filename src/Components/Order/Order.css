@@ -1,15 +1,15 @@
 :root {
-  --PrimaryColor: hsl(199, 100%, 33%);
-  --SecondaryColor: hsl(187, 85%, 43%);
-  --gradientColor: linear-gradient(to right, hsl(187, 85%, 43%),hsl(199, 100%, 33%));
+  --PrimaryColor: hsl(115, 100%, 33%);
+  --SecondaryColor: hsl(159, 85%, 43%);
+  --gradientColor: linear-gradient(to right, hsl(143, 85%, 43%),hsl(137, 100%, 33%));
   --whiteColor: hsl(0, 0%, 100%);
   --blackColor: hsl(201, 33%, 16%);
-  --textColor: hsl(240, 4%, 36%);
+  --textColor: #31302a(240, 4%, 36%);
   --whiteColorDeam: hsl(0, 0%, 93%);
   --greyText: rgb(190, 190, 190);
   --inputColor: rgb(239, 239, 239);
-  --cardBG: rgb(246, 245, 252);
-  --cardHover:rgb(255, 255, 255);
+  --bodyColor: rgb(240, 240, 246);
+  --cardBG: rgb(225, 225, 235);
 }
 :root .main {
   width: 200%;
@@ -25,7 +25,7 @@
   z-index: 1000;
   padding: 2rem;
 }
-:root .main .header .addBar {
+:root .main .header .TermsBar {
   background: var(--whiteColor);
   position: absolute;
   height: -moz-fit-content;
@@ -40,7 +40,7 @@
   box-shadow: 0 2px 4px rgba(2, 15, 29, 0.904);
   transition: 0.3s ease-in-out;
 }
-:root .main .header .addBar .addLists {
+:root .main .header .TermsBar .addLists {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -49,23 +49,23 @@
   margin: auto;
   padding: 0.5rem 0;
 }
-:root .main .header .addBar .addLists .btn {
+:root .main .header .TermsBar .addLists .btn {
   margin-top: 1rem;
 }
-:root .main .header .addBar .addLists .btn a {
+:root .main .header .TermsBar .addLists .btn a {
   font-weight: 600;
   color: var(--whiteColor);
 }
-:root .main .header .addBar .closeaddbar {
+:root .main .header .TermsBar .closeTermsbar {
   position: absolute;
   top: 1rem;
   right: 1.5rem;
   color: var(--PrimaryColor);
 }
-:root .main .header .addBar .closeaddbar:hover .icon {
+:root .main .header .TermsBar .closeTermsbar:hover .icon {
   color: var(--SecondaryColor);
 }
-:root .main .header .activeaddbar {
+:root .main .header .activeTermsbar {
   top: -10rem;
 }
 :root .main .checkbox-container {
