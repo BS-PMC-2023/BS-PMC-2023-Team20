@@ -142,9 +142,9 @@ const Admin = () => {
         <div className={active}>
           {/* <ul  lassName="addLists flex"> */}
           <div className="addItem">
-            <label htmlFor="ticketsAmount">choose item type:</label>
-            <div className="input flex">
-              <select onChange={onChange}>
+            <label htmlFor="ticketsAmount" >choose item type:</label>
+            <div className="input flex" >
+              <select onChange={onChange} data-testid="choose item type:">
                 <option value="1">camera</option>
                 <option value="2">recording studio</option>
                 <option value="3">projector</option>
@@ -156,7 +156,7 @@ const Admin = () => {
           <div className="addItem">
             <label htmlFor="imgSrc">Choose image:</label>
             <div className="input flex">
-              <input type="file" onChange={handleImageChange} />
+              <input type="file" onChange={handleImageChange}  data-testid="Choose image:"/>
             </div>
           </div>
 
@@ -166,7 +166,7 @@ const Admin = () => {
             <div className="input flex">
               <input type="text" placeholder='Enter Serial here...' value={Serial} onChange={(event) => {
                 setSerial(event.target.value);
-              }} />
+              }}  data-testid="Enter item Serial number:"/>
             </div>
           </div>
 
@@ -175,7 +175,7 @@ const Admin = () => {
             <div className="input flex">
               <input type="text" placeholder='Enter location here...' value={Location} onChange={(event) => {
                 setLocation(event.target.value);
-              }} />
+              }}   data-testid="Enter item location:"/>
             </div>
           </div>
 
@@ -185,7 +185,7 @@ const Admin = () => {
             <div className="input flex">
               <input type="textarea" placeholder='Enter description here...' value={Description} onChange={(event) => {
                 setDescription(event.target.value);
-              }} />
+              }} data-testid="Enter your description:"/>
             </div>
           </div>
 
@@ -199,9 +199,9 @@ const Admin = () => {
           </button>
           {/* </ul> */}
 
-          <div onClick={removeaddbar} className="closeaddbar">
+          <button onClick={removeaddbar} className="cancel">
             <AiFillCloseCircle className="icon" />
-          </div>
+          </button>
 
         </div>
       </header>
