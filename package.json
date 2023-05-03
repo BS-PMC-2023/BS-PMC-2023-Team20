@@ -11,6 +11,7 @@
     "@types/react-router-dom": "^5.3.3",
     "aos": "^2.3.4",
     "enzyme": "^3.11.0",
+    "es6-promise": "^4.2.8",
     "firebase": "^9.19.1",
     "icons": "^1.0.0",
     "mui": "^0.0.1",
