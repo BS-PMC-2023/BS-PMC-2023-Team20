@@ -42,5 +42,60 @@ const Myorders = () => {
     setItems(items);
 
   }
+  return (
+    <section id='main' className='main section container'>
+      
+      <div className="secTitle">
+        <h1 className="title">
+          My Orders
+        </h1>
+      </div>
+
+      
+ 
+      <div className="secContent grid">
+        {
+        Items &&
+            Items.map((item, index) => {
+          const reservation = Reservations[index];
+          return (
+            <div key={index} data-aos="fade-up" className="singleDestination">
+              <div className="imageDiv">
+                <img src={item.ImageUrl} alt="" />
+              </div>
+
+                <div className="cardInfo">
+                 <h4 className="destTitle"> {reservation.ItemType}</h4>
+                 <span className="continent flex">
+                    <HiOutlineLocationMarker className="icon"/>
+                    <span className="name">{item.Location}</span>
+                 </span>
+      
+                 <div className="fees flex">
+                    <div className="grade">
+                      <span  className="textD">From</span>
+                      <span>{reservation.FromDate}</span>
+                      <span className="textD ">  Retunrn Date: </span><span>{reservation.ReturnDate} </span> 
+
+                    </div>
+                   
+                 </div>
+
+
+                 <div className="desc">
+                 <p>Description: {item.Description}</p>
+                 </div>
+
+                </div>
+              </div>
+      
+            )
+          }) 
+        }
+      </div>
+     
+    </section>
+  )
+}
 
 export default Myorders
