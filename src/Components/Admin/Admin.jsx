@@ -139,7 +139,7 @@ const Admin = () => {
       <h1>{ }</h1>
       {/* menu for adding flights*/}
       <header className="header flex">
-        <div className={active}>
+        <div className={active}  data-testid='add-bar'>
           {/* <ul  lassName="addLists flex"> */}
           <div className="addItem">
             <label htmlFor="ticketsAmount" >choose item type:</label>
@@ -229,7 +229,6 @@ const Admin = () => {
                       <span className="textD ">Serial </span>
                       <span>{item.Serial} </span>
                     </div>
-
                   </div>
 
                   <div className="desc">
