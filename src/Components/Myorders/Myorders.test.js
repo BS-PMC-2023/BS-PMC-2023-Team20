@@ -22,7 +22,7 @@ jest.mock('firebase/firestore', () => {
   };
 });
 
-getFirestore.mockImplementation(() => db); // Add this line
+getFirestore.mockImplementation(() => db); 
 
 describe('Myorders Component', () => {
   afterEach(() => {
