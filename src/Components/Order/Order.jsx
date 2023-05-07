@@ -216,7 +216,7 @@ const Order = () => {
                     }}
                   >
                     Submit
-                  </a>{" "}
+                  </a>
                 </button>
               </div>
             </div>
