@@ -13,13 +13,21 @@ pipeline {
             steps {
                 sh 'npm install'
                 sh 'npm run build'
-                
+                sh 'jest selenium-test.js'
             }
         }
         stage('Test') {
-            steps {
-                sh 'npm test'
+        parallel {
+        stage('Selenium') {
+          steps {
+            sh 'jest selenium-test.js'
+          }
+          post {
+            always {
+              junit 'reports/selenium/**/*.xml'
             }
+          }
         }
+
     }
 }
