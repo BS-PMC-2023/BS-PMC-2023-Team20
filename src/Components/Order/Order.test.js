@@ -1,6 +1,4 @@
-const { Builder, By, until, Actions } = require('selenium-webdriver');
-const assert = require('assert');
-
+const { Builder, By, until } = require('selenium-webdriver');
 
 describe('Order component', () => {
     let driver;
@@ -23,7 +21,38 @@ describe('Order component', () => {
      
        const url = await driver.getCurrentUrl();
        expect(url).toContain("/Order"); 
-});
+    });
 
+    test('set dates should display number of rent days', async () => {
+      await driver.findElement(By.css(".DepartInput input")).click()
+      await driver.findElement(By.css(".DepartInput input")).sendKeys("06-09-2023")
+      await driver.findElement(By.css(".ReturnInput input")).click()
+      await driver.findElement(By.css(".ReturnInput input")).sendKeys("13-09-2023")
+      // Wait for number of rent days to appear
+      await driver.wait(until.elementLocated(By.xpath("/html/body/div/div/section/div[2]/div[2]/div[3]/div/form/div[3]/p")), 1000);
+      const rentDays = await driver.findElement(By.xpath("/html/body/div/div/section/div[2]/div[2]/div[3]/div/form/div[3]/p")).getText();
+      expect(rentDays).toContain("7");
+    });
+
+    test('test that user have to check box before submit', async () => {
+      const submitBtn = await driver.findElement(By.linkText('Submit'));
+      await driver.executeScript('arguments[0].click()', submitBtn);
+      await driver.wait(until.alertIsPresent());
+      const alert = await driver.switchTo().alert();
+      const alertText = await alert.getText();
+      expect(alertText).toContain('Please accept the terms and conditions');
+      await alert.accept();
+    });
+
+    test('test that user reservation is sumbited', async () => {
+      await driver.findElement(By.css("label > span")).click()
+      await driver.sleep(100); // wait for 1 second
+      const submitBtn = await driver.findElement(By.linkText('Submit'));
+      await driver.executeScript('arguments[0].click()', submitBtn);
+      await driver.sleep(2000); // wait for 1 second
+      const url = await driver.getCurrentUrl();
+      expect(url).toContain("/Myorders");  
+
+    });
 });
 
