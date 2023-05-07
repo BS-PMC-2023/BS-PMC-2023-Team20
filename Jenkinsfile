@@ -8,16 +8,8 @@ pipeline {
     environment{
         CI = 'false'
     }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'npm install'
-                sh 'npm run build'
-                sh 'jest selenium-test.js'
-            }
-        }
-        stage('Test') {
-        parallel {
+    stage('Test') {
+      parallel {
         stage('Selenium') {
           steps {
             sh 'jest selenium-test.js'
@@ -28,6 +20,26 @@ pipeline {
             }
           }
         }
-
+        stage('Jest') {
+          steps {
+            sh 'jest'
+          }
+          post {
+            always {
+              junit 'reports/jest/**/*.xml'
+              publishHTML(target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'reports/jest/coverage',
+                reportFiles: 'index.html',
+                reportName: 'Coverage Report',
+                reportTitles: 'Code Coverage Report'
+              ])
+            }
+          }
+        }
+      }
     }
+  
 }
