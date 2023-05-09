@@ -13,12 +13,21 @@ pipeline {
             steps {
                 sh 'npm install'
                 sh 'npm run build'
-                
+    
             }
         }
         stage('Test') {
-            steps {
-                sh 'npm test'
+            parallel {
+                    stage('Selenium') {
+                        steps {
+                            sh 'jest selenium-test.js'
+                        }
+                    }
+                    stage('Jest') {
+                        steps {
+                            sh 'jest'
+                        }
+                    }
             }
         }
     }
