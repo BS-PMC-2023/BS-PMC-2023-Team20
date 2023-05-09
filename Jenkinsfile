@@ -1,25 +1,24 @@
 pipeline {
     agent {
         docker {
-            image 'node:19-alpine'
+            image 'cypress/base:14.17.0'
             args '-p 3005:3005'
         }
     }
     environment{
-        CI = 'false'
+        CI = 'true'
     }
     stages {
         stage('Build') {
             steps {
                 sh 'npm install'
                 sh 'npm run build'
-                sh 'npx cypress install'
             }
         }
         stage('Test') {
             steps {
                 sh 'npm test'
-                sh 'npx cypress run'
+                sh 'xvfb-run npx cypress run'
             }
         }
     }
