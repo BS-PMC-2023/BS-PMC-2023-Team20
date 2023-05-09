@@ -8,15 +8,18 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import {
   doc,
   getDoc,
+  getDocs,
   serverTimestamp,
   setDoc,
   updateDoc,
+  collection, query, where,
 } from "firebase/firestore";
 import { uid } from "uid";
 import { db } from "../../firebase-config";
 import { AiFillCloseCircle } from 'react-icons/ai'
 
 import Terms from "../Terms/Terms";
+
 
 const Order = () => {
   const { state: item } = useLocation();
@@ -25,6 +28,11 @@ const Order = () => {
   const [ReturnDate, setReturnDate] = useState("");
   const [isChecked, setIsChecked] = useState(false);
 
+  //check how many people on the group
+  const [amount, setAmount] = useState(1);
+  const [names, setNames] = useState([]);
+  
+  
   const [active, setActive] = useState("TermsBar");
   const showTerms = () => {
     setNumClicks(numClicks + 1);
@@ -36,6 +44,53 @@ const Order = () => {
     setActive("TermsBar");
   };
 
+  //function that get the mau
+  const handleSelectChange = (event) => {
+    const amount = parseInt(event.target.value);
+    setAmount(amount);
+
+    // Generate an array of names for the selected amount, minus one
+    const newNames = Array.from({ length: amount - 1 }, (_, i) => names[i + 1] || '');
+    
+    // Keep the existing name for the first member
+    const firstMemberName = names[0] || '';
+    
+    // Update the names state to include the generated names
+    setNames([firstMemberName, ...newNames]);
+  };
+
+  const handleNameChange = (index, event) => {
+    const newNames = [...names];
+    newNames[index] = event.target.value;
+    setNames(newNames);
+  };
+
+
+  const getUidForEmail = async (email) => {
+    const usersRef = collection(db, "users");
+    const q = query(usersRef, where("email", "==", email));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      return null;
+    } else {
+      const userDoc = querySnapshot.docs[0];
+      return userDoc.id;
+    }
+  };
+  
+  const getUidsForNames = async (emails) => {
+    const uids = [];
+    for (const email of emails) {
+      const uid = await getUidForEmail(email);
+      if (uid) {
+        uids.push(uid);
+      } else {
+        console.error("User with email ${email} not found.");
+      }
+    }
+    return uids;
+  };
+  const uidlist = getUidsForNames(names);
   const [numClicks, setNumClicks] = useState(0);
 
   function handleCheckboxChange(event) {
@@ -49,7 +104,6 @@ const Order = () => {
       removeTerms();
     }
   }
-
  //function to remove addbar
   const removeaddbar = () => {
     setActive('addBar')
@@ -66,47 +120,52 @@ const Order = () => {
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const handleSubmit = async () => {
-    if (isChecked === false) 
-    {
+    if (isChecked === false) {
       alert("Please accept the terms and conditions");
       return;
     }
-    const getuser = doc(db, "users", user.uid);
-    const data = await getDoc(getuser);
-    var userData = data.data();
-
-    const getitem = doc(db, "items", item.uuid);
-
-    var itemWithoutreservations = Object.assign({}, item);
-    delete itemWithoutreservations.reservations;
-
-    var ruid = uid();
-    await setDoc(doc(db, "reservations", ruid), {
-      FirstName: userData.FirstName,
-      LastName: userData.LastName,
-      Userid: user.uid,
-      Itemid: item.uuid,
-      FromDate: FromDate,
-      ReturnDate: ReturnDate,
-      timeStamp: serverTimestamp(),
-    });
-
-    await updateDoc(getitem, {
-      reservations: [
-        ...item.reservations,
-        {
-          FirstName: userData.FirstName,
-          LastName: userData.LastName,
-          ruid: ruid,
-        },
-      ],
-    });
-
-    await updateDoc(getuser, {
-      reservations: [...userData.reservations, ruid],
-    });
-
-    await updateDoc(getuser, {});
+  
+    const uids = await getUidsForNames(names);
+    uids.unshift(user.uid); // Add the logged-in user's UID to the beginning of the list
+  
+    for (const userUid of uids) {
+      const getuser = doc(db, "users", userUid);
+      const data = await getDoc(getuser);
+      var userData = data.data();
+  
+      const getitem = doc(db, "items", item.uuid);
+  
+      var itemWithoutreservations = Object.assign({}, item);
+      delete itemWithoutreservations.reservations;
+  
+      var ruid = uid();
+  
+      await setDoc(doc(db, "reservations", ruid), {
+        FirstName: userData.FirstName,
+        LastName: userData.LastName,
+        Userid: userUid,
+        Itemid: item.uuid,
+        FromDate: FromDate,
+        ReturnDate: ReturnDate,
+        timeStamp: serverTimestamp(),
+      });
+  
+      await updateDoc(getitem, {
+        reservations: [
+          ...item.reservations,
+          {
+            FirstName: userData.FirstName,
+            LastName: userData.LastName,
+            ruid: ruid,
+          },
+        ],
+      });
+  
+      await updateDoc(getuser, {
+        reservations: [...userData.reservations, ruid],
+      });
+    }
+  
     await sleep(1000);
     navigate("/Myorders");
   };
@@ -180,8 +239,43 @@ const Order = () => {
                     </p>
                   </div>
                 )}
+                <div>
+  <div className="form-group">
+    <label htmlFor="amount-select">Number of group members:   </label>
+    <select
+      id="amount-select"
+      className="form-select"
+      value={amount}
+      onChange={handleSelectChange}
+    >
+      <option value={1}>1</option>
+      <option value={2}>2</option>
+      <option value={3}>3</option>
+      <option value={4}>4</option>
+      <option value={5}>5</option>
+    </select>
+  </div>
+
+  {amount > 1 && (
+    <>
+      {names.slice(1).map((name, index) => (
+        <div className="form-group" key={index}>
+          <label htmlFor={`name-${index + 1}`}>Email of {index + 2} member:</label>
+          <input
+            type="text"
+            id={`name-${index + 1}`}
+            className="form-control"
+            value={name || ""}
+            onChange={(event) => handleNameChange(index + 1, event)}
+          />
+        </div>
+      ))}
+    </>
+  )}
+</div>
               </form>
-              <div className="checkbox-container">
+              
+              <div className="checkbox-container">  
   <label htmlFor="terms-checkbox">
     <input
       id="terms-checkbox"
@@ -195,7 +289,6 @@ const Order = () => {
     I agree to the terms and conditions.
   </p>
 </div>
-
 
 
 
@@ -224,6 +317,7 @@ const Order = () => {
         </div>
       </div>
     </section>
+
   );
 };
 
