@@ -20,7 +20,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'npm test'
-                sh 'npm run cypress'
+                sh 'npm run cypress:ci'
             }
         }
     }
