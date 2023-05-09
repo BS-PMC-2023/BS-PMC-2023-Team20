@@ -3,7 +3,7 @@ import { ReactComponent as SCEicon } from "../../Assets/SCEicon.svg";
 import {Link} from 'react-router-dom'
 import { AiFillCloseCircle } from "react-icons/ai"
 import { TbGridDots } from "react-icons/tb"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchUserData } from '../../utils/fetchLocalStorageData';
 import { auth } from "../../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -26,10 +26,22 @@ const Navbar = () => {
     }
 
     const [user, loading] = useAuthState(auth);
+    const [userData, setUserData] = useState(null);
 
-    var userData=null;
-    if (user)
-        userData = fetchUserData();
+    useEffect(() => {
+        const fetchData = async () => {
+            if (user) {
+                try {
+                    const data = await fetchUserData();
+                    setUserData(data);
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        };
+
+        fetchData();
+    }, [user]);
 
     const logout = async () => {
         await signOut(auth);
@@ -52,12 +64,12 @@ const Navbar = () => {
                             <a href="/" className="navLink">Home</a>
                         </li>
 
-                        {user && userData.userRoles.includes('admin') &&
+                        {user && userData && userData.userRoles.includes('admin') &&
                         <li className="navItem">
                             <a href="admin" className="navLink">admin</a>
                         </li>}
 
-                        {user ? (
+                        {user && userData? (
                             <>
                                 <li className="navItem">
                                     <a href="Myorders" className="navLink">My Orders</a>
