@@ -1,24 +1,29 @@
 pipeline {
     agent {
         docker {
-            image 'cypress/base:14.17.0'
+            image 'node:19-alpine'
             args '-p 3005:3005'
         }
     }
     environment{
-        CI = 'true'
+        CI = 'false'
     }
     stages {
         stage('Build') {
             steps {
                 sh 'npm install'
                 sh 'npm run build'
+                sh 'npx cypress install'
             }
         }
         stage('Test') {
             steps {
                 sh 'npm test'
-                sh 'xvfb-run npx cypress run'
+                beforeScript {
+                    sh 'apk add xvfb' // Install Xvfb on Alpine Linux
+                    sh 'Xvfb :99 & export DISPLAY=:99' // Start Xvfb and set DISPLAY
+                }
+                sh 'npx cypress run'
             }
         }
     }
