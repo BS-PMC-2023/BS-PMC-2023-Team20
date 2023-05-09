@@ -19,7 +19,6 @@ import { db } from "../../firebase-config";
 import { AiFillCloseCircle } from 'react-icons/ai'
 
 import Terms from "../Terms/Terms";
-import axios from "axios";
 
 
 const Order = () => {
@@ -49,7 +48,7 @@ const Order = () => {
   const handleSelectChange = (event) => {
     const amount = parseInt(event.target.value);
     setAmount(amount);
-    
+
     // Generate an array of names for the selected amount, minus one
     const newNames = Array.from({ length: amount - 1 }, (_, i) => names[i + 1] || '');
     
@@ -64,16 +63,6 @@ const Order = () => {
     const newNames = [...names];
     newNames[index] = event.target.value;
     setNames(newNames);
-  };
-
-  const GetNames = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await axios.post("/api/group", { names });
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
   };
 
 
