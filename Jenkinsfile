@@ -13,7 +13,7 @@ pipeline {
             steps {
                 sh 'npm install'
                 sh 'npm run build'
-                sh 'npm install lambdatest-cypress-cli'
+                sh 'npm install cypress'
 
             }
         }
