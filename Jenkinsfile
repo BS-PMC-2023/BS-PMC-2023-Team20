@@ -19,6 +19,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'npm test'
+                sh 'npx cypress run --browser chrome --headless --record --key 0c5f0a5e-5b1e-4b0e-9b0e-8b0e9b0e9b0e'
             }
         }
     }
