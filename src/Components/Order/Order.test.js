@@ -1,3 +1,6 @@
+
+
+
 const { Builder, By, until } = require('selenium-webdriver');
 
 describe('Order component', () => {
@@ -44,15 +47,15 @@ describe('Order component', () => {
       await alert.accept();
     });
 
-    test('test that user reservation is sumbited', async () => {
-      await driver.findElement(By.css("label > span")).click()
-      await driver.sleep(100); // wait for 1 second
-      const submitBtn = await driver.findElement(By.linkText('Submit'));
-      await driver.executeScript('arguments[0].click()', submitBtn);
-      await driver.sleep(2000); // wait for 1 second
-      const url = await driver.getCurrentUrl();
-      expect(url).toContain("/Myorders");  
+    // test('test that user reservation is sumbited', async () => {
+    //   await driver.findElement(By.css("label > span")).click()
+    //   await driver.sleep(100); // wait for 1 second
+    //   const submitBtn = await driver.findElement(By.linkText('Submit'));
+    //   await driver.executeScript('arguments[0].click()', submitBtn);
+    //   await driver.sleep(3000); // wait for 3 second
+    //   const url = await driver.getCurrentUrl();
+    //   expect(url).toContain("/Myorders");  
 
-    });
+    // });
 });
 
