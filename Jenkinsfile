@@ -13,11 +13,14 @@ pipeline {
             steps {
                 sh 'npm install'
                 sh 'npm run build'
+                sh 'npm install lambdatest-cypress-cli'
+
             }
         }
         stage('Test') {
             steps {
                 sh 'npm test'
+                sh 'npm run cypress:lambda'
             }
         }
     }
