@@ -15,6 +15,12 @@ pipeline {
                 sh 'npm run build'
             }
         }
+                stage('Start Server') {
+            steps {
+                sh 'npm start'
+                sleep 10 
+            }
+        }
         stage('Test') {
             steps {
                 sh 'npm test'
