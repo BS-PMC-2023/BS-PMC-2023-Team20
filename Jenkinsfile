@@ -19,6 +19,7 @@ pipeline {
             steps {
                 sh 'npm test'
                 sh 'npm ci'
+                sh 'npx cypress run'
             }
         }
     }
