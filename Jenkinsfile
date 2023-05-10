@@ -15,7 +15,6 @@ pipeline {
                 sh 'npm run build'
                 echo "Running build ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 sh 'npm ci'
-                sh 'npm run cy:verify'
             }
         }
 
