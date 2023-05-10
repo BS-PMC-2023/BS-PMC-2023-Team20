@@ -13,25 +13,21 @@ pipeline {
             steps {
                 sh 'npm install'
                 sh 'npm run build'
+                echo "Running build ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                sh 'npm ci'
+                sh 'npm run cy:verify'
             }
         }
-        stage('Start Server') {
-            steps {
-                script {
-                    def serverProcess = null
-                    try {
-                        serverProcess = sh(script: 'npm start &', returnStdout: true)
-                        sleep 10 // Wait for the server to start (adjust if necessary)
-                    } finally {
-                        timeout(time: 2, unit: 'MINUTES') {
-                            if (serverProcess) {
-                                sh "kill -9 \$(lsof -t -i:3005)" // Close the server on port 3005
-                            }
-                        }
-                    }
-                }
-            }
+
+        
+        stage('start local server') {
+        steps {
+            // start local server in the background
+            // we will shut it down in "post" command block
+            sh 'nohup npm run start &'
         }
+        }
+ 
         stage('Test') {
             steps {
                 sh 'npm test'
@@ -40,4 +36,11 @@ pipeline {
             }
         }
     }
+    post {
+    // shutdown the server running in the background
+    always {
+      echo 'Stopping local server'
+      sh 'pkill -f http-server'
+    }
+  }
 }
