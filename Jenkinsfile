@@ -25,7 +25,7 @@ pipeline {
                     } finally {
                         timeout(time: 2, unit: 'MINUTES') {
                             if (serverProcess) {
-                                sh "kill -9 $(lsof -t -i:3005)" // Close the server on port 3005
+                                sh "kill -9 \$(lsof -t -i:3005)" // Close the server on port 3005
                             }
                         }
                     }
