@@ -9,11 +9,19 @@ describe('Order component', () => {
     cy.get('input[type="text"]').type('admin@gmail.com');
     cy.get('input[type="password"]').type('123456');
     cy.xpath('/html/body/div/div/section/div[2]/form/div[3]/span').click();
-    cy.wait(4000); // Wait for one second
+    cy.wait(4000); // Wait for four seconds
+    cy.url().should('eq', 'http://localhost:3000/');
   });
+  
     it('clicking the Order button should navigate to the Order page,set dates should display number of rent days,test that user have to check box before submit,test that user reservation is submitted', () => {
+      cy.visit('http://localhost:3000/Sing-in');
+      cy.get('input[type="text"]').type('admin@gmail.com');
+      cy.get('input[type="password"]').type('123456');
+      cy.xpath('/html/body/div/div/section/div[2]/form/div[3]/span').click();
+      cy.wait(4000); // Wait for one second
+      cy.wait(4000); // Wait for one second
       cy.visit('http://localhost:3000/');
-      cy.xpath('/html/body/div/div/section[2]/div[2]/div/div[2]/button').click();
+      cy.xpath('/html/body/div/div/section[2]/div[2]/div[2]/div[2]/button').click();
       cy.url().should('include', '/Order');
       cy.get('.DepartInput input').click();
       cy.get('.DepartInput input').type('2023-09-06');
