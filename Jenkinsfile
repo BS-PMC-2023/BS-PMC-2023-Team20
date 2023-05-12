@@ -1,11 +1,11 @@
 pipeline {
     agent {
         docker {
-            image 'node:19-alpine'
-            args '-p 3000:3000'
+            image 'cypress/base:18.14.1'
+            args '-p 3005:3005'
         }
     }
-    environment{
+    environment {
         CI = 'false'
     }
     stages {
@@ -18,6 +18,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'npm test'
+                sh 'npm ci'
             }
         }
     }
