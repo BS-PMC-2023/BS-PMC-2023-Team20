@@ -12,6 +12,7 @@ import Admin from './Components/Admin/Admin';
 import Myorders from './Components/Myorders/Myorders';
 import ProtectedRoute from './Permissions/ProtectedRoute';
 import { fetchUserData } from './utils/fetchLocalStorageData';
+import Confirmation from './Components/Confirmation/Confirmation';
 
 function App() {
 
@@ -53,6 +54,7 @@ function App() {
 
         <Route element={<ProtectedRoute user={adminState} />}>
           <Route path="Admin" element={<Admin />} />
+          <Route path="Confirmation" element={<Confirmation />} />
         </Route>
 
       </Routes>

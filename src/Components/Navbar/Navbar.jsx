@@ -67,6 +67,7 @@ const Navbar = () => {
                         {user && userData && userData.userRoles.includes('admin') &&
                         <li className="navItem">
                             <a href="admin" className="navLink">admin</a>
+                            <a href="Confirmation" className="navLink">Confirmation Page</a>
                         </li>}
 
                         {user && userData? (
