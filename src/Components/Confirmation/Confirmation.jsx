@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { doc, updateDoc, getDocs, collection } from "firebase/firestore";
+import { doc, updateDoc, getDocs,getDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import "./Confirmation.css";
 
 const Confirmation = () => {
   const [reservations, setReservations] = useState([]);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     const fetchReservations = async () => {
@@ -16,7 +17,18 @@ const Confirmation = () => {
       }));
 
       setReservations(fetchedReservations);
-    }
+
+      // Fetch the items related to these reservations
+      const fetchedItems = await Promise.all(
+        fetchedReservations.map(async (res) => {
+          const itemDocRef = doc(db, "items", res.Itemid);
+          const docSnap = await getDoc(itemDocRef);
+          return docSnap.data();
+        })
+      );
+
+      setItems(fetchedItems);
+    };
 
     fetchReservations();
   }, []);
@@ -34,8 +46,9 @@ const Confirmation = () => {
       </div>
 
       <div className="secContent grid">
-        {reservations.map(reservation => (
+        {reservations.map((reservation, index) => (
           <div key={reservation.id} className="reservation-card">
+            <img src={items[index]?.ImageUrl} alt="" />
             <p>Reservation ID: {reservation.id}</p>
             <p>Item ID: {reservation.Itemid}</p>
             <p>User ID: {reservation.Userid}</p>
