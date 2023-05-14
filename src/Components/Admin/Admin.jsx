@@ -142,12 +142,17 @@ const Admin = () => {
         <div className={active}>
           {/* <ul  lassName="addLists flex"> */}
           <div className="addItem">
-            <label htmlFor="ticketsAmount">choose item type:</label>
+            <label htmlFor="ticketsAmount">Choose item type:</label>
             <div className="input flex">
               <select onChange={onChange}>
-                <option value="1">camera</option>
-                <option value="2">recording studio</option>
-                <option value="3">projector</option>
+                <option value="1">Camera</option>
+                <option value="2">Recording studio</option>
+                <option value="3">Projector</option>
+                <option value="4">Apple</option>
+                <option value="5">Tripod</option>
+                <option value="6">Cables</option>
+                <option value="7">Lights</option>
+                <option value="7">Convertors</option>
               </select>
             </div>
           </div>
