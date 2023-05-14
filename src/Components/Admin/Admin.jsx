@@ -34,7 +34,28 @@ const Admin = () => {
   const handleImageChange = (e) => {
     if (e.target.files[0]) {
       const file = e.target.files[0]
-      console.log(file);
+      const reader = new FileReader();
+
+     
+      reader.onload = (event) => {
+        console.log(event.target.result); // logs the file bits
+        const fileData = event.target.result;
+        const dataView = new DataView(fileData);
+        const signature = dataView.getUint16(0, true);
+        if (signature === 0x5A4D) { // "MZ" signature in little-endian format
+          alert('Please select a JPEG or PNG image file. you try to uploud an exe file');
+          setImgSrc(null);
+          return;
+        }if (condition) {
+          
+        } else {
+          
+        } {
+          console.log("Not a valid exe file.");
+        }
+      };
+      reader.readAsArrayBuffer(file);
+
       if(file.type !== 'image/jpeg'){
         alert('Please select a JPEG or PNG image file');
         setImgSrc(null);
