@@ -50,8 +50,6 @@ const Confirmation = () => {
           <div key={reservation.id} className="reservation-card">
             <img src={items[index]?.ImageUrl} alt="" />
             <p>Reservation ID: {reservation.id}</p>
-            <p>Item ID: {reservation.Itemid}</p>
-            <p>User ID: {reservation.Userid}</p>
             <p>First Name: {reservation.FirstName}</p>
             <p>Last Name: {reservation.LastName}</p>
             <p>From: {reservation.FromDate}</p>
