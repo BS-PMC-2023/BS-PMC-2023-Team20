@@ -40,7 +40,6 @@ const Myorders = () => {
       })
     );
     setItems(items);
-
   }
   return (
     <section id='main' className='main section container'>
@@ -86,6 +85,9 @@ const Myorders = () => {
                  <p>Description: {item.Description}</p>
                  </div>
 
+                 <div className="desc">
+                 <p>Status: {reservation.Status}</p>
+                 </div>
                 </div>
               </div>
       

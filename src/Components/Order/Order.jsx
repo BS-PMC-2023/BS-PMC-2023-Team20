@@ -104,10 +104,6 @@ const Order = () => {
       removeTerms();
     }
   }
- //function to remove addbar
-  const removeaddbar = () => {
-    setActive('addBar')
-  }
 
   useEffect(() => {
     Aos.init({ duration: 4000 });
@@ -147,6 +143,7 @@ const Order = () => {
         Itemid: item.uuid,
         FromDate: FromDate,
         ReturnDate: ReturnDate,
+        Status: "Pending",
         timeStamp: serverTimestamp(),
       });
   
