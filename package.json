@@ -12,6 +12,7 @@
     "chromedriver": "^112.0.1",
     "enzyme": "^3.11.0",
     "es6-promise": "^4.2.8",
+    "file-type": "^18.4.0",
     "firebase": "^9.19.1",
     "firebase-admin": "^11.7.0",
     "firebase-functions": "^4.3.1",

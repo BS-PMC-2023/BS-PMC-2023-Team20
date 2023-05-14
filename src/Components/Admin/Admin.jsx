@@ -11,6 +11,7 @@ import { collection, deleteDoc, doc, getDocs, setDoc } from "firebase/firestore"
 import { uid } from "uid";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
+
 const Admin = () => {
   useEffect(() => {
     Aos.init({ duration: 4000 })
@@ -30,10 +31,16 @@ const Admin = () => {
   const [Currentitem, setCurrentitem] = useState(null)
 
   //uploadImage
-
   const handleImageChange = (e) => {
     if (e.target.files[0]) {
-      setImgSrc(e.target.files[0]);
+      const file = e.target.files[0]
+      console.log(file);
+      if(file.type !== 'image/jpeg'){
+        alert('Please select a JPEG or PNG image file');
+        setImgSrc(null);
+        return;
+      }
+      setImgSrc(file);
     }
   }
 
@@ -80,7 +87,7 @@ const Admin = () => {
 
   useEffect(() => {
     fetchItems();
-  }, [])
+  }, )
 
   const fetchItems = async () => {
     const data = await getDocs(ItemsRef)
@@ -197,8 +204,7 @@ const Admin = () => {
               removeaddbar()
             }}>Submit</a>
           </button>
-          {/* </ul> */}
-
+          
           <button onClick={removeaddbar} className="cancel">
             <AiFillCloseCircle className="icon" />
           </button>
