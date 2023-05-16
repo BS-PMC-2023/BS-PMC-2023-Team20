@@ -29,10 +29,20 @@ const Footer = () => {
             <a href="#" className="logo flex"><h1><SCEicon className='icon' />  Warehouse.</h1></a>
           </div>
 
-          <div data-aos="fade-up" data-aos-duration="2000"  className="footerParagraph">
-          The warehouse of the Department of Visual Communication
-          Sami Shamoon College
-          </div>
+          <div data-aos="fade-up" data-aos-duration="2000" className="footerParagraph">
+  The warehouse of the Department of Visual Communication
+  Sami Shamoon College
+
+  <br />  for any question or request, please contact
+  Production studio and warehouse manager: <br />
+  <br />  Production studio and warehouse manager: Mr. Shay Sadika <br />
+
+  <a href="tel:08-6174709">08-6174709</a>
+  <br />
+  <a href="mailto:shaysa@sce.ac.il">shaysa@sce.ac.il</a>
+</div>
+
+
 
           <div data-aos="fade-up" data-aos-duration="3000"  className="footerSocials flex">       
           <a href="https://www.youtube.com/@scebsc" target="_blank" rel="noopener noreferrer"><AiFillYoutube className="icon" /></a>
