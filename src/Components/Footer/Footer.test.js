@@ -3,6 +3,7 @@ import Enzyme, { render, shallow } from 'enzyme';
 import Adapter from '@cfaester/enzyme-adapter-react-18';
 import Footer from './Footer';
 import { ReactComponent as SCEicon } from '../../Assets/SCEicon.svg';
+import { screen } from '@testing-library/react';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Footer', () => {
@@ -32,4 +33,22 @@ describe('Footer', () => {
         const wrapper = shallow(<SCEicon />);
         expect(wrapper.exists()).toBe(true);
     });
-  });
+
+    it('contains the correct contact information', () => {
+      const wrapper = shallow(<Footer />);
+      const contactInfo = wrapper.find('.footerParagraph').text();
+      expect(contactInfo).toContain('The warehouse of the Department of Visual Communication Sami Shamoon College');
+      expect(contactInfo).toContain('for any question or request, please contact Production studio and warehouse manager:');
+      expect(contactInfo).toContain('Production studio and warehouse manager: Mr. Shay Sadika');
+      expect(contactInfo).toContain('08-6174709');
+      expect(contactInfo).toContain('shaysa@sce.ac.il');
+    });
+  
+    it('contains clickable phone number and email', () => {
+      const wrapper = shallow(<Footer />);
+      const phoneNumberLink = wrapper.find('a[href="tel:08-6174709"]');
+      const emailLink = wrapper.find('a[href="mailto:shaysa@sce.ac.il"]');
+      expect(phoneNumberLink).toHaveLength(1);
+      expect(emailLink).toHaveLength(1);
+    });
+});
