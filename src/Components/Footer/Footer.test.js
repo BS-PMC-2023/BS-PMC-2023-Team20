@@ -51,4 +51,14 @@ describe('Footer', () => {
       expect(phoneNumberLink).toHaveLength(1);
       expect(emailLink).toHaveLength(1);
     });
-});
+
+    it('contains the site owners contact information', () => {
+      const wrapper = shallow(<Footer />);
+      const studentContacts = wrapper.find('.footerIntro span');
+      expect(studentContacts).toHaveLength(4);
+      expect(studentContacts.at(0).text()).toContain('Daniel Markov : daniema14@ac.sce.ac.il');
+      expect(studentContacts.at(1).text()).toContain('Anton Volkov : antonvo@ac.sce.ac.il');
+      expect(studentContacts.at(2).text()).toContain('Pavel Kormilchik : pavelko@ac.sce.ac.il');
+      expect(studentContacts.at(3).text()).toContain('Orel Meir : orelma2@ac.sce.ac.il');
+    });
+  });
