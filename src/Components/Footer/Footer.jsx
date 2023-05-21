@@ -34,7 +34,6 @@ const Footer = () => {
                 </h1>
               </a>
             </div>
-
             <div
               data-aos="fade-up"
               data-aos-duration="2000"
@@ -49,30 +48,48 @@ const Footer = () => {
               <a href="tel:08-6174709">08-6174709</a>
               <br />
               <a href="mailto:shaysa@sce.ac.il">shaysa@sce.ac.il</a>
-            </div>
-
-            <div
-              data-aos="fade-up"
-              data-aos-duration="3000"
-              className="footerSocials flex"
-            >
-              <a
-                href="https://www.youtube.com/@scebsc"
-                target="_blank"
-                rel="noopener noreferrer"
+              <br />
+              <div
+                data-aos="fade-up"
+                data-aos-duration="3000"
+                className="footerSocials flex"
               >
-                <AiFillYoutube className="icon" />
-              </a>
-              <a
-                href="https://www.instagram.com/sce.academy/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <AiFillInstagram className="icon" />
-              </a>
+                <a
+                  href="https://www.youtube.com/@scebsc"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <AiFillYoutube className="icon" />
+                </a>
+                <a
+                  href="https://www.instagram.com/sce.academy/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <AiFillInstagram className="icon" />
+                </a>
+              </div>
             </div>
+            <br /> Site was created by 4 SCE students from the department of
+            software engineering,
+            <br /> for technical issues please connect :
+            <span>
+              Daniel Markov :{" "}
+              <a href="mailto:daniema14@ac.sce.ac.il">daniema14@ac.sce.ac.il</a>
+            </span>
+            <span>
+              Anton Volkov :{" "}
+              <a href="mailto:antonvo@ac.sce.ac.il">antonvo@ac.sce.ac.il</a>
+            </span>
+            <span>
+              Pavel Kormilchik :{" "}
+              <a href="mailto:pavelko@ac.sce.ac.il">pavelko@ac.sce.ac.il</a>
+            </span>
+            <span>
+              Orel Meir :{" "}
+              <a href="mailto:orelma2@ac.sce.ac.il">orelma2@ac.sce.ac.il</a>
+            </span>
           </div>
-
           <div className="footerDiv flex">
             <small>Warehouse.</small>
             <small>
