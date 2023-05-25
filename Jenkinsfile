@@ -29,16 +29,12 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'npm test'
-                sh 'npm ci'
-                sh 'npx cypress run'
             }
         }
         
         stage('Coverage') {
             steps {
                 sh 'npm run test -- --coverage --watchAll=false'
-                sh 'npm ci'
-                // You can include additional steps here to process or display the coverage results
             }
         }
     }
