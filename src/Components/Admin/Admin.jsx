@@ -108,17 +108,26 @@ const Admin = () => {
 
   //function to toggle addbar
   const showadd = (item = null) => {
-    if (item.uuid) {
-      setCurrentitem(item)
+    if (item && item.uuid) {
+      setCurrentitem(item);
       setItemType(item.TripType);
       setImgSrc(item.ImageUrl);
       setLocation(item.Location);
       setSerial(item.Serial);
       setDescription(item.Description);
       setReservations(item.reservations);
+    } else {
+      setCurrentitem(null);
+      setItemType("");
+      setImgSrc("");
+      setLocation("");
+      setSerial("");
+      setDescription("");
+      setReservations([]);
     }
-    setActive('addBar activeaddbar')
-  }
+    setActive('addBar activeaddbar');
+  };
+  
   //function to remove addbar
   const removeaddbar = () => {
     clearinput();
