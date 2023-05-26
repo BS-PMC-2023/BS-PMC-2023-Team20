@@ -67,6 +67,7 @@ const Confirmation = () => {
             <p>From: {reservation.FromDate}</p>
             <p>Return: {reservation.ReturnDate}</p>
             <p>Status: {reservation.Status}</p>
+            {reservation.UserRoles.includes('teacher') && <p className='teach'>Lecturer</p>}
             <div className="status-buttons">
               <button
                 className="btn"
