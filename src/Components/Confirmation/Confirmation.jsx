@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { doc, updateDoc, getDocs,getDoc, collection } from "firebase/firestore";
+import { doc, updateDoc, getDocs, getDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import "./Confirmation.css";
 
@@ -11,11 +11,23 @@ const Confirmation = () => {
     const fetchReservations = async () => {
       const reservationsCollection = collection(db, "reservations");
       const reservationDocs = await getDocs(reservationsCollection);
-      const fetchedReservations = reservationDocs.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
+      const fetchedReservations = [];
 
+      for (let res of reservationDocs.docs) {
+        const resData = res.data();
+        const userDocRef = doc(db, "users", resData.Userid);
+        const userDocSnap = await getDoc(userDocRef);
+        const userData = userDocSnap.data();
+
+        fetchedReservations.push({
+          id: res.id,
+          ...resData,
+          UserRoles: userData.userRoles
+        });
+      }
+
+      fetchedReservations.sort((a, b) => b.UserRoles.includes("teacher") - a.UserRoles.includes("teacher"));
+      
       setReservations(fetchedReservations);
 
       // Fetch the items related to these reservations
@@ -47,7 +59,7 @@ const Confirmation = () => {
 
       <div className="secContent grid">
         {reservations.map((reservation, index) => (
-          <div key={reservation.id} className="reservation-card">
+          <div key={reservation.id} className={`reservation-card ${reservation.UserRoles.includes('teacher') ? 'teacher' : ''}`}>
             <img src={items[index]?.ImageUrl} alt="" />
             <p>Reservation ID: {reservation.id}</p>
             <p>First Name: {reservation.FirstName}</p>
@@ -55,7 +67,6 @@ const Confirmation = () => {
             <p>From: {reservation.FromDate}</p>
             <p>Return: {reservation.ReturnDate}</p>
             <p>Status: {reservation.Status}</p>
-
             <div className="status-buttons">
               <button
                 className="btn"
@@ -83,4 +94,4 @@ const Confirmation = () => {
   );
 };
 
-export default Confirmation;
+export default Confirmation
