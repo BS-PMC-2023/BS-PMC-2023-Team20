@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./Footer.css";
 import video from "../../Assets/video2.mp4";
 import { ReactComponent as SCEicon } from "../../Assets/SCEicon.svg";
+import {FiChevronRight} from 'react-icons/fi'
 import { AiFillYoutube } from "react-icons/ai";
 import { AiFillInstagram } from "react-icons/ai";
 import Aos from "aos";
@@ -90,6 +91,31 @@ const Footer = () => {
               <a href="mailto:orelma2@ac.sce.ac.il">orelma2@ac.sce.ac.il</a>
             </span>
           </div>
+          <div className="footerLinks grid">
+          {/* Group One */}
+           <div data-aos="fade-up" data-aos-duration="4000"  className="linkGroup">
+               <span className="groupTitle">
+                SCE
+               </span>
+
+               <li className="footerList flex" onClick={() => window.location.href = 'https://www.sce.ac.il/'}>
+                <FiChevronRight className="icon"/>
+                SCE
+                </li>
+
+                <li className="footerList flex" onClick={() => window.location.href = 'https://moodle.sce.ac.il/my/'}>
+                  <FiChevronRight className="icon"/>
+                  Moodle
+               </li>
+
+               <li className="footerList flex" onClick={() => window.location.href = 'https://portal.sce.ac.il/'}>
+                  <FiChevronRight className="icon"/>
+                  Portal
+               </li>
+
+           </div>
+
+         </div>
           <div className="footerDiv flex">
             <small>Warehouse.</small>
             <small>
