@@ -31,6 +31,7 @@ const Singup = () => {
   const [birthday, setbirthday] = useState("");
   const userRoles = ['user'];
   
+  const [emailError, setEmailError] = useState('');
   let navigate = useNavigate();
   
   const register = async () => {
@@ -55,10 +56,34 @@ const Singup = () => {
         localStorage.setItem("user", JSON.stringify(data.data()));
         navigate("/");
         window.location.reload(false);
+        setEmailError('');
     } catch (error) {
       console.log(error.message);
-      alert("Error somthing went wrong please try again  " + " "+error.message); 
+      if (error.code === 'auth/email-already-in-use') {
+        setEmailError('This email is already in use. Please try another email.');
+        setTimeout(() => {
+          setEmailError('');
+        }, 5000);
+      } else {
+        setEmailError('Something went wrong. Please try again.');
+        setTimeout(() => {
+          setEmailError('');
+        }, 5000);
+      }
     }
+    
+  };
+  const renderEmailError = () => {
+    if (emailError) {
+      return (
+        <div className="error-notification">
+          <div className="error-bubble">
+            {emailError}
+          </div>
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -126,7 +151,7 @@ const Singup = () => {
           }}/>
             </div>
           </div>
-
+          {renderEmailError()}
 
           <div className="submit flex">
            <AiOutlineFileDone className="icon"/>
