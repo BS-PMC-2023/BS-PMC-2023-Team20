@@ -1,13 +1,13 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import './Singin.css'
 import video from "../../Assets/video3.mp4";
-import {BiUserCircle} from 'react-icons/bi'
-import {RiLockPasswordFill} from 'react-icons/ri'
-import {AiOutlineFileDone} from 'react-icons/ai'
+import { BiUserCircle } from 'react-icons/bi'
+import { RiLockPasswordFill } from 'react-icons/ri'
+import { AiOutlineFileDone } from 'react-icons/ai'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { useNavigate } from 'react-router-dom'
-
+import DOMPurify from 'dompurify';
 import { useState } from "react";
 import {
   signInWithEmailAndPassword
@@ -17,11 +17,11 @@ import { auth, db } from "../../firebase-config";
 import { useRef } from "react";
 import { doc, getDoc } from 'firebase/firestore';
 import { sendPasswordResetEmail } from "firebase/auth";
-  
+
 
 const Singin = () => {
-  useEffect(()=>{
-    Aos.init({duration: 2000})
+  useEffect(() => {
+    Aos.init({ duration: 2000 })
   }, [])
 
   const snackbarRef = useRef(null);
@@ -33,9 +33,9 @@ const Singin = () => {
 
     let navigate = useNavigate();
 
-    const login = async () => {
+  const login = async () => {
     try {
-        const user = await signInWithEmailAndPassword(
+      const user = await signInWithEmailAndPassword(
         auth,
         loginEmail,
         loginPassword
@@ -85,33 +85,33 @@ const Singin = () => {
 
       <div data-aos="fade-down" className="Sing-inContent container">
         <div className="textDiv">
-        <span  className="smallText">
-          Sing-in Page
-        </span>
-        <h1 data-aos="fade-down" className="Sing-inTitle">
-          Sing in
-        </h1>
+          <span className="smallText">
+            Sing-in Page
+          </span>
+          <h1 data-aos="fade-down" className="Sing-inTitle">
+            Sing in
+          </h1>
         </div>
 
-        <form data-aos="fade-down" className="cardDiv grid" onSubmit = {login}>
+        <form data-aos="fade-down" className="cardDiv grid" onSubmit={login}>
 
           <div className="emailInput">
             <label htmlFor="emailName">Enter your email:</label>
             <div className="input flex">
-            <input type="text" placeholder='Enter email here...' onChange={(event) => {
-            setLoginEmail(event.target.value);
-          }}/>
-            <BiUserCircle className="icon"/>
+              <input type="text" placeholder='Enter email here...' onChange={(event) => {
+                setLoginEmail(DOMPurify.sanitize(event.target.value));
+              }} />
+              <BiUserCircle className="icon" />
             </div>
           </div>
 
           <div className="PassWordInput">
             <label htmlFor="PassWord">Enter your password:</label>
             <div className="input flex">
-            <input type="password"  placeholder='Enter password here...'  onChange={(event) => {
-            setLoginPassword(event.target.value);
-          }}/>
-            <RiLockPasswordFill className="icon"/>
+              <input type="password" placeholder='Enter password here...' onChange={(event) => {
+                setLoginPassword(DOMPurify.sanitize(event.target.value));
+              }} />
+              <RiLockPasswordFill className="icon" />
             </div>
           </div>
           {renderErrorMessage()}
@@ -123,8 +123,8 @@ const Singin = () => {
             <label>If you forgot your password enter your email and click </label>
             <span type="submit" className="forgot-password" onClick={forgotPassword}>here</span>
           </div>
-          
-          
+
+
         </form>
       </div>
     </section>

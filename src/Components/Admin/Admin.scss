@@ -24,7 +24,23 @@
     padding: 1rem;
     
    }
+   .cancel{
+    background: none;
+    margin-top: 0.1rem;
+    color: var(--whiteColor);
+    font-weight: 600;
+    justify-content: space-between;
+    display: inline-block;
+    border: none;      
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    color: var(--PrimaryColor);
+    &:hover .icon{
+        color: var(--SecondaryColor);
+    }
 
+    }
     .input{
         height: 40px;
         padding: 0 1rem;
@@ -53,7 +69,9 @@
         input[type=range]{
             background: blue;
         }
+    
         
+
     }    
    
      
@@ -105,16 +123,7 @@
                         color: var(--whiteColor);
                     }
                 }
-            }
-            .closeaddbar{
-                position: absolute;
-                top: 1rem;
-                right: 1.5rem;
-                color: var(--PrimaryColor);
-                &:hover .icon{
-                    color: var(--SecondaryColor);
-                }
-            }    
+            } 
         }
         .activeaddbar{
             top: -10rem;

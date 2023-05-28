@@ -24,6 +24,22 @@
   font-size: 15px;
   padding: 1rem;
 }
+:root .main .cancel {
+  background: none;
+  margin-top: 0.1rem;
+  color: var(--whiteColor);
+  font-weight: 600;
+  justify-content: space-between;
+  display: inline-block;
+  border: none;
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  color: var(--PrimaryColor);
+}
+:root .main .cancel:hover .icon {
+  color: var(--SecondaryColor);
+}
 :root .main .input {
   height: 40px;
   padding: 0 1rem;
@@ -96,15 +112,6 @@
 :root .main .header .addBar .addLists .btn a {
   font-weight: 600;
   color: var(--whiteColor);
-}
-:root .main .header .addBar .closeaddbar {
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  color: var(--PrimaryColor);
-}
-:root .main .header .addBar .closeaddbar:hover .icon {
-  color: var(--SecondaryColor);
 }
 :root .main .header .activeaddbar {
   top: -10rem;

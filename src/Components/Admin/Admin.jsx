@@ -10,6 +10,8 @@ import { db, storage } from "../../firebase-config";
 import { collection, deleteDoc, doc, getDocs, setDoc } from "firebase/firestore";
 import { uid } from "uid";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import DOMPurify from 'dompurify';
+
 
 const Admin = () => {
   useEffect(() => {
@@ -30,10 +32,31 @@ const Admin = () => {
   const [Currentitem, setCurrentitem] = useState(null)
 
   //uploadImage
-
   const handleImageChange = (e) => {
     if (e.target.files[0]) {
-      setImgSrc(e.target.files[0]);
+      const file = e.target.files[0]
+      const reader = new FileReader();
+
+
+      reader.onload = (event) => {
+        console.log(event.target.result); // logs the file bits
+        const fileData = event.target.result;
+        const dataView = new DataView(fileData);
+        const signature = dataView.getUint16(0, true);
+        if (signature === 0x5A4D) { // "MZ" signature in little-endian format
+          alert('Please select a JPEG or PNG image file. you try to uploud an exe file');
+          setImgSrc(null);
+          return;
+        }
+      };
+      reader.readAsArrayBuffer(file);
+
+      if (file.type !== 'image/jpeg') {
+        alert('Please select a JPEG or PNG image file');
+        setImgSrc(null);
+        return;
+      };
+      setImgSrc(file);
     }
   }
 
@@ -80,7 +103,7 @@ const Admin = () => {
 
   useEffect(() => {
     fetchItems();
-  }, [])
+  },)
 
   const fetchItems = async () => {
     const data = await getDocs(ItemsRef)
@@ -148,7 +171,7 @@ const Admin = () => {
       <h1>{ }</h1>
       {/* menu for adding flights*/}
       <header className="header flex">
-        <div className={active}>
+        <div className={active} data-testid='add-bar'>
           {/* <ul  lassName="addLists flex"> */}
           <div className="addItem">
             <label htmlFor="ticketsAmount">Choose item type:</label>
@@ -170,7 +193,7 @@ const Admin = () => {
           <div className="addItem">
             <label htmlFor="imgSrc">Choose image:</label>
             <div className="input flex">
-              <input type="file" onChange={handleImageChange} />
+              <input type="file" onChange={handleImageChange} data-testid="Choose image:" />
             </div>
           </div>
 
@@ -179,8 +202,8 @@ const Admin = () => {
             <label htmlFor="Serial">Enter item Serial number:</label>
             <div className="input flex">
               <input type="text" placeholder='Enter Serial here...' value={Serial} onChange={(event) => {
-                setSerial(event.target.value);
-              }} />
+                setSerial(DOMPurify.sanitize(event.target.value));
+              }} data-testid="Enter item Serial number:" />
             </div>
           </div>
 
@@ -188,8 +211,8 @@ const Admin = () => {
             <label htmlFor="location">Enter item location:</label>
             <div className="input flex">
               <input type="text" placeholder='Enter location here...' value={Location} onChange={(event) => {
-                setLocation(event.target.value);
-              }} />
+                setLocation(DOMPurify.sanitize(event.target.value));
+              }} data-testid="Enter item location:" />
             </div>
           </div>
 
@@ -198,8 +221,8 @@ const Admin = () => {
             <label htmlFor="description">Enter your description:</label>
             <div className="input flex">
               <input type="textarea" placeholder='Enter description here...' value={Description} onChange={(event) => {
-                setDescription(event.target.value);
-              }} />
+                setDescription(DOMPurify.sanitize(event.target.value));
+              }} data-testid="Enter your description:" />
             </div>
           </div>
 
@@ -211,11 +234,10 @@ const Admin = () => {
               removeaddbar()
             }}>Submit</a>
           </button>
-          {/* </ul> */}
 
-          <div onClick={removeaddbar} className="closeaddbar">
+          <button onClick={removeaddbar} className="cancel">
             <AiFillCloseCircle className="icon" />
-          </div>
+          </button>
 
         </div>
       </header>
@@ -243,7 +265,6 @@ const Admin = () => {
                       <span className="textD ">Serial </span>
                       <span>{item.Serial} </span>
                     </div>
-
                   </div>
 
                   <div className="desc">
