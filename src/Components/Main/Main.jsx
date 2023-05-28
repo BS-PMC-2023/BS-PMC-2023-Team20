@@ -4,29 +4,59 @@ import {HiOutlineLocationMarker} from 'react-icons/hi'
 import {HiClipboardList} from 'react-icons/hi'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../../firebase-config'
 import { useNavigate } from 'react-router-dom'
 
-const Main = () => {
+const Main = ({Filters}) => {
 
     const ItemsRef = collection(db,"items")
     const [Items,setItems] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
+
     let navigate = useNavigate();
 
     useEffect(() => {
+      try{
         fetchItems();
+      }catch(error){
+        console.log(error.message);
+        setErrorMessage('Database is down.');
+      }
+
         Aos.init({duration: 4000})
-      }, [])
+      }, [Filters])
 
       async function fetchItems(){
-
-        const data = await getDocs(ItemsRef) 
-        setItems(data.docs.map((doc) => (doc.data())));
+        try {
+          let itemQuery = ItemsRef;
+      
+          // If a filter has been set, apply it to the query.
+          if (Filters && Filters[0] && Filters[0].ItemType) {
+            itemQuery = query(ItemsRef, where("ItemType", "==", Filters[0].ItemType));
+          }
+      
+          const data = await getDocs(itemQuery);
+          setItems(data.docs.map((doc) => (doc.data())));
+        } catch (error) {
+          console.error("Error fetching items: ", error);
+        }
       }
 
     const Order = async (item) => {
         navigate("Order", { state: item });
+    };
+    const renderErrorMessage = () => {
+      if (errorMessage) {
+        return (
+          <div className="error-notification">
+            <div className="error-bubble">
+              {errorMessage}
+            </div>
+          </div>
+        );
+      }
+      return null;
     };
 
     return (
@@ -35,8 +65,7 @@ const Main = () => {
           <h3 className="title">
             Available items
           </h3>
-        </div>   
-
+        </div>      
          <div className="secContent grid">
         {
           Items.map((item,index) => {
@@ -64,7 +93,7 @@ const Main = () => {
               </div>
                 
                 <div className="desc">
-               <p>Description: {item.Description}</p>
+               <p>Description:{item.Description}</p>
               </div>
                 <button className='btn flex'  onClick={() => Order(item)}>Order <HiClipboardList className="icon"/> </button>
                 </div>
@@ -72,7 +101,7 @@ const Main = () => {
       
             )
           }) 
-        }
+        }{renderErrorMessage()}
       </div>     
 </section>
 

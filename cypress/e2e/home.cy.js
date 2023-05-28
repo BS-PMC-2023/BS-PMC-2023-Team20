@@ -1,0 +1,31 @@
+require('cypress-xpath')
+
+describe('Home Page', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/Sing-in');
+    cy.get('input[type="text"]').type('admin@gmail.com');
+    cy.get('input[type="password"]').type('123456');
+    cy.xpath('/html/body/div/div/section/div[2]/form/div[3]/span').click();
+    cy.wait(4000); // Wait for four seconds
+    cy.url().should('eq', 'http://localhost:3000/');
+  });
+
+  it('Filters and search for items', () => {
+
+    
+    cy.get('select').select(5);
+
+    
+    cy.get('.searchOptions').click();
+    cy.wait(6000);
+
+    
+    cy.get('.singleDestination').each(($item) => {
+        cy.wrap($item).within(() => {
+          cy.get('.desc').should('contain', 'Description:');
+        });
+      }).then(() => {
+        
+      });
+  });
+});
