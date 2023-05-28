@@ -1,12 +1,14 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import Singin from './Singin';
+import Signin from './Signin';
 import { MemoryRouter } from 'react-router-dom';
+import React from "react";
+
 
 // It tests whether the user can successfully sign- in  by filling out the form fields and submitting the form.
 test('allows user to Sign-in', async () => {
   render(
     <MemoryRouter>
-      <Singin />
+      <Signin />
     </MemoryRouter>
   );
   

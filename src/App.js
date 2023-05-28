@@ -5,8 +5,8 @@ import Navbar from './Components/Navbar/Navbar';
 import Home from './Components/Home/Home';
 import Footer from './Components/Footer/Footer';
 import {BrowserRouter as Router, Route , Routes } from 'react-router-dom';
-import Singup from './Components/Singup/Singup';
-import Singin from './Components/Singin/Singin';
+import Signup from './Components/Signup/Signup';
+import Signin from './Components/Signin/Signin';
 import Order from './Components/Order/Order';
 import Admin from './Components/Admin/Admin';
 import Myorders from './Components/Myorders/Myorders';
@@ -42,9 +42,9 @@ function App() {
             <Route path="/" element={<Home />} />     
           </Route>
 
-          <Route path="/Sing-up" element={<Singup />} />     
+        <Route path="/Sign-up" element={<Signup />} />     
 
-          <Route path="/Sing-in" element={<Singin />} />     
+        <Route path="/Sign-in" element={<Signin />} />     
 
           <Route element={<ProtectedRoute user={Logedin} />}>
             <Route path="Order" element={<Order />} />    

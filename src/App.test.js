@@ -2,15 +2,9 @@ import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import App from './App';
 import Navbar from './Components/Navbar/Navbar';
-import Home from './Components/Home/Home';
 import Footer from './Components/Footer/Footer';
-import Singup from './Components/Singup/Singup';
-import Singin from './Components/Singin/Singin';
-import Order from './Components/Order/Order';
-import Admin from './Components/Admin/Admin';
-import Myorders from './Components/Myorders/Myorders';
-import ProtectedRoute from './Permissions/ProtectedRoute';
-import Confirmation from './Components/Confirmation/Confirmation';
+import Signup from './Components/Signup/Signup';
+import Signin from './Components/Signin/Signin';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from '@cfaester/enzyme-adapter-react-18';
 
@@ -35,15 +29,15 @@ jest.mock('./utils/fetchLocalStorageData', () => ({
       expect(wrapper.find(Footer)).toHaveLength(1);
     });
   
-    it('renders the Singup component when the route matches "/Sing-up"', () => {
+    it('renders the Signinup component when the route matches "/Signin-up"', () => {
       const wrapper = shallow(<App />);
-      const singupRoute = wrapper.find({ path: '/Sing-up' });
-      expect(singupRoute.props().element).toEqual(<Singup />);
+      const SignupRoute = wrapper.find({ path: '/Sign-up' });
+      expect(SignupRoute.props().element).toEqual(<Signup />);
     });
   
-    it('renders the Singin component when the route matches "/Sing-in"', () => {
+    it('renders the Signinin component when the route matches "/Signin-in"', () => {
       const wrapper = shallow(<App />);
-      const singinRoute = wrapper.find({ path: '/Sing-in' });
-      expect(singinRoute.props().element).toEqual(<Singin />);
+      const SigninRoute = wrapper.find({ path: '/Sign-in' });
+      expect(SigninRoute.props().element).toEqual(<Signin />);
     });
   });

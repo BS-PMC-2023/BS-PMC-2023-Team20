@@ -2,7 +2,7 @@ require('cypress-xpath')
 
 describe('Home Page', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/Sing-in');
+    cy.visit('http://localhost:3000/Sign-in');
     cy.get('input[type="text"]').type('admin@gmail.com');
     cy.get('input[type="password"]').type('123456');
     cy.xpath('/html/body/div/div/section/div[2]/form/div[3]/span').click();

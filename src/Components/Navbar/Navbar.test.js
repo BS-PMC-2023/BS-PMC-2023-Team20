@@ -13,11 +13,11 @@ describe('Navbar component when user is not logged in', () => {
     });
     
     it('renders a Sign-in button', () => {
-    expect(wrapper.find('Link[to="/Sing-in"]').text()).toEqual('Sing-in');
+    expect(wrapper.find('Link[to="/Sign-in"]').text()).toEqual('Sign-in');
     });
     
     it('renders a Sign-up button', () => {
-    expect(wrapper.find('Link[to="/Sing-up"]').text()).toEqual('Sing-up');
+    expect(wrapper.find('Link[to="/Sign-up"]').text()).toEqual('Sign-up');
     });
     
     it('does not render My Orders link', () => {
@@ -53,8 +53,8 @@ describe('Navbar', () => {
     it('does not render a Logout button when user is not logged in', () => {
       const wrapper = shallow(<Navbar />);
       expect(wrapper.find('button.btn').length).toEqual(2);
-      expect(wrapper.find('button.btn').at(0).text()).toEqual('Sing-in');
-      expect(wrapper.find('button.btn').at(1).text()).toEqual('Sing-up');
+      expect(wrapper.find('button.btn').at(0).text()).toEqual('Sign-in');
+      expect(wrapper.find('button.btn').at(1).text()).toEqual('Sign-up');
       expect(wrapper.find('Link[to="/Logout"]').length).toEqual(0);
     });
   
@@ -62,8 +62,8 @@ describe('Navbar', () => {
         const wrapper = shallow(<Navbar />);
         jest.spyOn(React, 'useState').mockReturnValueOnce([null, false]);
         expect(wrapper.find('button.btn').length).toEqual(2);
-        expect(wrapper.find('button.btn').at(0).text()).toEqual('Sing-in');
-        expect(wrapper.find('button.btn').at(1).text()).toEqual('Sing-up');
+        expect(wrapper.find('button.btn').at(0).text()).toEqual('Sign-in');
+        expect(wrapper.find('button.btn').at(1).text()).toEqual('Sign-up');
         expect(wrapper.find('Link[to="/Logout"]').length).toEqual(0);
       });
   });

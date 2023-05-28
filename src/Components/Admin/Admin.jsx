@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react"
 import './Admin.css'
 import { HiOutlineLocationMarker } from 'react-icons/hi'
 import { AiFillCloseCircle } from 'react-icons/ai'

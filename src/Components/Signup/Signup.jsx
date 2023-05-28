@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react'
-import './Singup.css'
+import React, {useEffect} from "react"
+import './Signup.css'
 import video from "../../Assets/video3.mp4";
 import {BiUserCircle} from 'react-icons/bi'
 import {RiLockPasswordFill} from 'react-icons/ri'
@@ -19,7 +19,7 @@ import {createUserWithEmailAndPassword} from "firebase/auth";
 import {auth,db } from "../../firebase-config";
 import DOMPurify from 'dompurify';
 
-const Singup = () => {
+const Signup = () => {
   useEffect(()=>{
     Aos.init({duration: 2000})
   }, [])
@@ -102,16 +102,16 @@ const Singup = () => {
   }
 
   return (
-    <section id='Sing-up' className='Sing-up'>
+    <section id='Sign-up' className='Sign-up'>
       <div className="overlay"></div>
       <video src={video} autoPlay loop muted type="video/mp4"></video>
 
-      <div data-aos="fade-down" className="Sing-upContent container">
+      <div data-aos="fade-down" className="Sign-upContent container">
         <div className="textDiv">
         <span  className="smallText">
-          Sing-up Page
+        Sign-up Page
         </span>
-        <h1 data-aos="fade-down" className="Sing-upTitle">
+        <h1 data-aos="fade-down" className="Sign-upTitle">
           Create Account right now
         </h1>
         </div>
@@ -180,4 +180,4 @@ const Singup = () => {
   )
 }
 
-export default Singup
+export default Signup
