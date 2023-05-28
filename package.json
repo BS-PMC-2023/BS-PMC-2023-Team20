@@ -57,6 +57,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
     "cypress": "^12.13.0",
     "cypress-xpath": "^2.0.1",
     "eslint": "^8.41.0",
