@@ -13,8 +13,9 @@ import Myorders from './Components/Myorders/Myorders';
 import ProtectedRoute from './Permissions/ProtectedRoute';
 import { fetchUserData } from './utils/fetchLocalStorageData';
 
-function App() {
 
+function App() {
+  
   var userData = fetchUserData();
   var adminState=false;
   var Logedin=false;
@@ -30,37 +31,39 @@ function App() {
   }
 
   return (
-    <Router>
-    <>
-    <Navbar/>
-    <div className = 'content'>
-      <Routes>
-        <Route element={<ProtectedRoute user={Logedin} />}>
-          <Route path="/" element={<Home />} />     
-        </Route>
+    
+      <Router>
+      <>
+      <Navbar/>
+      <div className = 'content'>
+        <Routes>
+          <Route element={<ProtectedRoute user={Logedin} />}>
+            <Route path="/" element={<Home />} />     
+          </Route>
 
-        <Route path="/Sing-up" element={<Singup />} />     
+          <Route path="/Sing-up" element={<Singup />} />     
 
-        <Route path="/Sing-in" element={<Singin />} />     
+          <Route path="/Sing-in" element={<Singin />} />     
 
-        <Route element={<ProtectedRoute user={Logedin} />}>
-          <Route path="Order" element={<Order />} />    
-        </Route>
-        
-        <Route element={<ProtectedRoute user={Logedin} />}>
-          <Route path="Myorders" element={<Myorders />} />  
-        </Route>
+          <Route element={<ProtectedRoute user={Logedin} />}>
+            <Route path="Order" element={<Order />} />    
+          </Route>
+          
+          <Route element={<ProtectedRoute user={Logedin} />}>
+            <Route path="Myorders" element={<Myorders />} />  
+          </Route>
 
-        <Route element={<ProtectedRoute user={adminState} />}>
-          <Route path="Admin" element={<Admin />} />
-        </Route>
+          <Route element={<ProtectedRoute user={adminState} />}>
+            <Route path="Admin" element={<Admin />} />
+          </Route>
 
-      </Routes>
-    </div>
-    <Footer/>
-    </>
-    </Router>
+        </Routes>
+      </div>
+      <Footer/>
+      </>
+      </Router>
 
+    
   );
 }
 

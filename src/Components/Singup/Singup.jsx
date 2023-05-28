@@ -17,7 +17,7 @@ import {
 import { useState } from "react";
 import {createUserWithEmailAndPassword} from "firebase/auth";
 import {auth,db } from "../../firebase-config";
-
+import DOMPurify from 'dompurify';
 
 const Singup = () => {
   useEffect(()=>{
@@ -97,7 +97,7 @@ const Singup = () => {
             <label htmlFor="emailName">Enter your email:</label>
             <div className="input flex">
             <input type="text" placeholder='Enter email here...' onChange={(event) => {
-            setRegisterEmail(event.target.value);
+            setRegisterEmail(DOMPurify.sanitize(event.target.value));
           
           }}/>
             <BiUserCircle className="icon"/>
@@ -108,7 +108,7 @@ const Singup = () => {
             <label htmlFor="PassWord">Enter your password:</label>
             <div className="input flex">
             <input type="password"  placeholder='Enter password here...'  onChange={(event) => {
-            setRegisterPassword(event.target.value);
+            setRegisterPassword(DOMPurify.sanitize(event.target.value));
           }}/>
             <RiLockPasswordFill className="icon"/>
             </div>
@@ -118,7 +118,7 @@ const Singup = () => {
             <label htmlFor="Fname">Enter your First name:</label>
             <div className="input flex">
             <input type="text" placeholder='Enter First name here...' onChange={(event) => {
-            setFirstName(event.target.value);
+            setFirstName(DOMPurify.sanitize(event.target.value));
           }}/>
             <MdDriveFileRenameOutline className="icon"/>
             </div>
@@ -128,7 +128,7 @@ const Singup = () => {
             <label htmlFor="Lname">Enter your Last name:</label>
             <div className="input flex">
             <input type="text" placeholder='Enter Last name here...' onChange={(event) => {
-            setLastName(event.target.value);
+            setLastName(DOMPurify.sanitize(event.target.value));
           }}/>
             <MdDriveFileRenameOutline className="icon"/>
             </div>
@@ -138,7 +138,7 @@ const Singup = () => {
             <label htmlFor="date">Select your birthday date :</label>
             <div className="input flex">
             <input type="date" onChange={(event) => {
-            setbirthday(event.target.value);
+            setbirthday(DOMPurify.sanitize(event.target.value));
           }}/>
             </div>
           </div>
