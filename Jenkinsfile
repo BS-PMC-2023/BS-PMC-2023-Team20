@@ -1,3 +1,4 @@
+
 pipeline {
     agent {
         docker {
@@ -15,17 +16,15 @@ pipeline {
                 sh 'npm run build'
             }
         }
-                stage('Start Server') {
-            steps {
-                sh 'npm start'
-                sleep 10 
-            }
-        }
         stage('Test') {
             steps {
                 sh 'npm test'
                 sh 'npm ci'
-                sh 'npx cypress run'
+            }
+        }
+        stage('Coverage') {
+            steps {
+                sh 'npm run test -- --coverage --watchAll=false'
             }
         }
     }

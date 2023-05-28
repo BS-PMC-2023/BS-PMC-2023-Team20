@@ -29,6 +29,8 @@ const Singin = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState('');
+
     let navigate = useNavigate();
 
     const login = async () => {
@@ -43,10 +45,13 @@ const Singin = () => {
         localStorage.setItem("user", JSON.stringify(data.data()));
         navigate("/");
         window.location.reload(false);
-
+        setErrorMessage('');
     } catch (error) {
         console.log(error.message);
-        alert("Error somthing went wrong please try again"+error.message); 
+        setErrorMessage('Email/Password is wrong.');
+        setTimeout(() => {
+          setErrorMessage('');
+        }, 5000);
         snackbarRef.current.show();
     }
     };
@@ -60,7 +65,18 @@ const Singin = () => {
         snackbarRef.current.show();
       }
     };
-    
+    const renderErrorMessage = () => {
+      if (errorMessage) {
+        return (
+          <div className="error-notification">
+            <div className="error-bubble">
+              {errorMessage}
+            </div>
+          </div>
+        );
+      }
+      return null;
+    };
 
   return (
     <section id='Sing-in' className='Sing-in'>
@@ -98,9 +114,10 @@ const Singin = () => {
             <RiLockPasswordFill className="icon"/>
             </div>
           </div>
+          {renderErrorMessage()}
           <div className="submit flex">
            <AiOutlineFileDone className="icon"/>
-           <span type="submit" onClick={login} >Submit</span>
+           <span type="submit" onClick={login} >Submit</span><br/>
           </div>
           <div className="password-container">
             <label>If you forgot your password enter your email and click </label>
