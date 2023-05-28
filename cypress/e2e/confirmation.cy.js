@@ -5,7 +5,7 @@ describe("Confirmation Page", () => {
     });
   
     it('should allow users to sign in with valid credentials', () => {
-        cy.visit('http://localhost:3000/Sing-in');
+        cy.visit('http://localhost:3000/Sign-in');
         cy.get('input[type="text"]').type('admin@gmail.com');
         cy.get('input[type="password"]').type('123456');
         cy.xpath('/html/body/div/div/section/div[2]/form/div[3]/span').click();
@@ -13,7 +13,7 @@ describe("Confirmation Page", () => {
         cy.url().should('eq', 'http://localhost:3000/');
       });
     it("renders confirmation page with correct reservation data", () => {
-        cy.visit('http://localhost:3000/Sing-in');
+        cy.visit('http://localhost:3000/Sign-in');
         cy.get('input[type="text"]').type('admin@gmail.com');
         cy.get('input[type="password"]').type('123456');
         cy.xpath('/html/body/div/div/section/div[2]/form/div[3]/span').click();
@@ -45,7 +45,7 @@ describe("Confirmation Page", () => {
     });
 
     it("should show Lecturer text for teacher res", () => {
-        cy.visit('http://localhost:3000/Sing-in');
+        cy.visit('http://localhost:3000/Sign-in');
         cy.get('input[type="text"]').type('admin@gmail.com');
         cy.get('input[type="password"]').type('123456');
         cy.xpath('/html/body/div/div/section/div[2]/form/div[3]/span').click();

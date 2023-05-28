@@ -1,5 +1,10 @@
+<<<<<<< refs/remotes/origin/main:src/Components/Singin/Singin.jsx
 import React, { useEffect } from 'react'
 import './Singin.css'
+=======
+import React, {useEffect} from "react"
+import './Signin.css'
+>>>>>>> BSPMC2320-234: fixed names and added metrics:src/Components/Signin/Signin.jsx
 import video from "../../Assets/video3.mp4";
 import { BiUserCircle } from 'react-icons/bi'
 import { RiLockPasswordFill } from 'react-icons/ri'
@@ -19,9 +24,15 @@ import { doc, getDoc } from 'firebase/firestore';
 import { sendPasswordResetEmail } from "firebase/auth";
 
 
+<<<<<<< refs/remotes/origin/main:src/Components/Singin/Singin.jsx
 const Singin = () => {
   useEffect(() => {
     Aos.init({ duration: 2000 })
+=======
+const Signin = () => {
+  useEffect(()=>{
+    Aos.init({duration: 2000})
+>>>>>>> BSPMC2320-234: fixed names and added metrics:src/Components/Signin/Signin.jsx
   }, [])
 
   const snackbarRef = useRef(null);
@@ -79,18 +90,27 @@ const Singin = () => {
     };
 
   return (
-    <section id='Sing-in' className='Sing-in'>
+    <section id='Sign-in' className='Sign-in'>
       <div className="overlay"></div>
       <video src={video} autoPlay loop muted type="video/mp4"></video>
 
-      <div data-aos="fade-down" className="Sing-inContent container">
+      <div data-aos="fade-down" className="Sign-inContent container">
         <div className="textDiv">
+<<<<<<< refs/remotes/origin/main:src/Components/Singin/Singin.jsx
           <span className="smallText">
             Sing-in Page
           </span>
           <h1 data-aos="fade-down" className="Sing-inTitle">
             Sing in
           </h1>
+=======
+        <span  className="smallText">
+        Sign-in Page
+        </span>
+        <h1 data-aos="fade-down" className="Sign-inTitle">
+        Sign in
+        </h1>
+>>>>>>> BSPMC2320-234: fixed names and added metrics:src/Components/Signin/Signin.jsx
         </div>
 
         <form data-aos="fade-down" className="cardDiv grid" onSubmit={login}>
@@ -131,4 +151,4 @@ const Singin = () => {
   )
 }
 
-export default Singin
+export default Signin

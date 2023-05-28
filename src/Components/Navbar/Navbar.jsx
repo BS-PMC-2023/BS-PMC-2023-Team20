@@ -1,4 +1,5 @@
 import './Navbar.css'
+import React from "react";
 import { ReactComponent as SCEicon } from "../../Assets/SCEicon.svg";
 import {Link} from 'react-router-dom'
 import { AiFillCloseCircle } from "react-icons/ai"
@@ -86,11 +87,11 @@ const Navbar = () => {
                         ):(
                             <>
                             <button className="btn">
-                                <Link to="/Sing-in">Sing-in</Link>
+                                <Link to="/Sign-in">Sign-in</Link>
                             </button>
 
                             <button className="btn">
-                                <Link to="/Sing-up">Sing-up</Link>
+                                <Link to="/Sign-up">Sign-up</Link>
                             </button></>
                         )}
 
