@@ -43,5 +43,29 @@ describe("Confirmation Page", () => {
       cy.get("@reservationCard").find(".btn").contains("Accept").click();
       cy.get("@reservationCard").should("contain", "Status: Accept");
     });
+
+    it("should show Lecturer text for teacher res", () => {
+        cy.visit('http://localhost:3000/Sing-in');
+        cy.get('input[type="text"]').type('admin@gmail.com');
+        cy.get('input[type="password"]').type('123456');
+        cy.xpath('/html/body/div/div/section/div[2]/form/div[3]/span').click();
+        cy.wait(4000); // Wait for four seconds
+        cy.url().should('eq', 'http://localhost:3000/');
+    
+      cy.visit("http://localhost:3000/Confirmation");
+  
+      cy.get(".title").should("contain", "Confirmation page");
+  
+      cy.get(".reservation-card").first().as("reservationCard");
+  
+      cy.get("@reservationCard").should("contain", "Reservation ID:");
+      cy.get("@reservationCard").should("contain", "First Name:");
+      cy.get("@reservationCard").should("contain", "Last Name:");
+      cy.get("@reservationCard").should("contain", "From:");
+      cy.get("@reservationCard").should("contain", "Return:");
+      cy.get("@reservationCard").should("contain", "Status:");
+      cy.get("@reservationCard").should("contain", "Lecturer");
+      
+    });
   });
   
