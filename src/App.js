@@ -58,7 +58,7 @@ function App() {
           <Route path="Admin" element={<Admin />} />
           <Route path="Confirmation" element={<Confirmation />} />
         </Route>
-
+        <Route path="*" element={<ProtectedRoute user={Logedin}/>}/>
         </Routes>
       </div>
       <Footer/>
