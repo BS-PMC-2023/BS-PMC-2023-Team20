@@ -27,5 +27,11 @@ pipeline {
                 sh 'npm run test -- --coverage --watchAll=false'
             }
         }
+
+        stage('Complexity and potential errors and bugs') {
+            steps {
+                sh 'npx eslint src'
+            }
+        }
     }
 }

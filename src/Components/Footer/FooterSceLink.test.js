@@ -18,6 +18,23 @@ describe("Footer", () => {
     window.location = location;
   });
 
+  test("SCE link redirects to the correct URL", () => {
+    const { location } = window;
+    delete window.location;
+    window.location = { href: "" };
+  
+    render(<Footer />);
+    const sceLinks = screen.getAllByText("SCE");
+    const sceLink = sceLinks.find((link) => link.nodeName === "LI"); // Select the appropriate LI element
+  
+    userEvent.click(sceLink);
+  
+    expect(window.location.href).toBe("https://www.sce.ac.il/");
+  
+    window.location = location;
+  });
+  
+
   test("Portal link redirects to the correct URL", () => {
     const { location } = window;
     delete window.location;

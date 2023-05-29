@@ -30,3 +30,19 @@ test('allows user to register', async () => {
   
 });
 
+test('allows user to select birthday date', () => {
+  render(
+    <MemoryRouter>
+      <Signup />
+    </MemoryRouter>
+  );  
+
+  const label = screen.getByText(/Select your birthday date/i);
+  const dateInput = label.parentElement.querySelector('input[type="date"]');
+
+  const mockDate = '2023-05-29'; // Set an example date
+  fireEvent.change(dateInput, { target: { value: mockDate } });
+
+  expect(dateInput.value).toBe(mockDate);
+});
+

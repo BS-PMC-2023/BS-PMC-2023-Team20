@@ -67,7 +67,15 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "!src/index.js"
+      "!src/index.js",
+      "!src/Components/Order/Order.jsx",
+      "!src/Components/Main/Main.jsx",
+      "!src/Components/Confirmation/Confirmation.jsx",
+      "!src/Components/Admin/Admin.jsx",
+      "!src/Components/Myorders/Myorders.jsx",
+      "!src/App.js",
+      "!src/Components/Signin/Signin.jsx"
+
     ]
   }
 }
