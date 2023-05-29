@@ -30,8 +30,7 @@ pipeline {
 
         stage('Complexity and potential errors and bugs') {
             steps {
-                sh 'npm install eslint'
-                sh 'eslint src'
+                sh 'npx eslint src'
             }
         }
     }
