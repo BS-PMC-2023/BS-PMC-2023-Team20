@@ -36,7 +36,7 @@ const Signup = () => {
 
   const register = async () => {
     try {
-      const regex = /[a-zA-Z0-9]+@ac.sce.il/g
+      const regex = /[a-zA-Z0-9]+@ac.sce.ac.il/g
       if (!regex.test(registerEmail)) {
         throw new Error('You must enter SCE email!');
       }
