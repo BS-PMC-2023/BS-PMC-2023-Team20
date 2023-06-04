@@ -6,10 +6,9 @@ describe('Order Component', () => {
     cy.get('input[type="text"]').type('admin@gmail.com');
     cy.get('input[type="password"]').type('123456');
     cy.xpath('/html/body/div/div/section/div[2]/form/div[3]/span').click();
-    cy.wait(4000); 
     cy.url().should('eq', 'http://localhost:3000/');
   });
-
+  
 
 
   it('should fill out and submit the form', () => {
@@ -23,7 +22,7 @@ describe('Order Component', () => {
 
     cy.get('#terms-checkbox').check({ force: true });
 
-    
+
     cy.get('button.btn').contains("Submit").click();
 
     cy.url().should('include', 'http://localhost:3000/Myorders');
