@@ -22,6 +22,7 @@
     "Jest": "npm:jest@^27.5.1",
     "mui": "^0.0.1",
     "react": "^18.2.0",
+    "react-datepicker": "^4.12.0",
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.1.1",
     "react-helmet": "^6.1.0",
@@ -75,7 +76,6 @@
       "!src/Components/Myorders/Myorders.jsx",
       "!src/App.js",
       "!src/Components/Signin/Signin.jsx"
-
     ]
   }
 }
