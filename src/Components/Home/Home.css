@@ -19,11 +19,8 @@
   align-items: center;
   justify-content: center;
   margin: auto;
-  height: 80%;
 }
-.main.section.container{
-  padding-top: 0px;
-}
+
 .home .overlay {
   position: absolute;
   height: 80%;
