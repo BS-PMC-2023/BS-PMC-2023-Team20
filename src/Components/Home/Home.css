@@ -19,10 +19,14 @@
   align-items: center;
   justify-content: center;
   margin: auto;
+  height: 80%;
+}
+.main.section.container{
+  padding-top: 0px;
 }
 .home .overlay {
   position: absolute;
-  height: 100%;
+  height: 80%;
   width: 100%;
   background: rgb(77, 92, 98);
   mix-blend-mode: hard-light;
@@ -334,5 +338,8 @@
   }
   .home .homeContent .cardDiv .searchOptions span {
     font-size: 17px;
+  }
+  .home .Vid{
+    height: 80%;
   }
 }/*# sourceMappingURL=Home.css.map */

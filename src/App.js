@@ -13,6 +13,8 @@ import Myorders from './Components/Myorders/Myorders';
 import ProtectedRoute from './Permissions/ProtectedRoute';
 import { fetchUserData } from './utils/fetchLocalStorageData';
 import Confirmation from './Components/Confirmation/Confirmation';
+import SignProtected from './Permissions/SignProtected';
+
 
 
 function App() {
@@ -44,7 +46,10 @@ function App() {
 
         <Route path="/Sign-up" element={<Signup />} />     
 
-        <Route path="/Sign-in" element={<Signin />} />     
+        <Route element={<SignProtected user={Logedin} />}>
+          <Route path="/Sign-in" element={<Signin />} />     
+        </Route>
+     
 
           <Route element={<ProtectedRoute user={Logedin} />}>
             <Route path="Order" element={<Order />} />    
