@@ -44,7 +44,9 @@ const Signin = () => {
         const UserRef = doc(db, "users", user.user.uid);
         const data = await getDoc(UserRef);
         localStorage.setItem("user", JSON.stringify(data.data()));
-        navigate("/");
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
         window.location.reload(false);
         setErrorMessage('');
     } catch (error) {
@@ -122,8 +124,8 @@ const Signin = () => {
            <span type="submit" onClick={login} >Submit</span><br/>
           </div>
           <div className="password-container">
-            <label>If you forgot your password enter your email and click </label>
-            <span type="submit" className="forgot-password" onClick={forgotPassword}>here</span>
+           
+            <span type="submit" className="forgot-password" onClick={forgotPassword}>Forgot Password</span>
           </div>
 
 
