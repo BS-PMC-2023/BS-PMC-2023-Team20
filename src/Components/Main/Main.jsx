@@ -30,14 +30,14 @@ const Main = ({ Filters }) => {
   async function fetchItems() {
     try {
       let itemQuery = ItemsRef;
-
+  
       // If a filter has been set, apply it to the query.
       if (Filters && Filters[0] && Filters[0].ItemType) {
         itemQuery = query(ItemsRef, where("ItemType", "==", Filters[0].ItemType));
       }
-
+  
       const data = await getDocs(itemQuery);
-      setItems(data.docs.map((doc) => doc.data()));
+      setItems(data.docs.map((doc) => ({ id: doc.id, ...doc.data() }))); // Include the document ID in the item object
     } catch (error) {
       console.error("Error fetching items: ", error);
     }

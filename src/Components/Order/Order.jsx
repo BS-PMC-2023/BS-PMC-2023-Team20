@@ -119,7 +119,7 @@ const Order = () => {
 
 
 
-  }, [user,Reservations,FromDate,ReturnDate]);
+  }, [user,Reservations,FromDate,ReturnDate,item]);
 
 
   const fetchItems=async()=>{
