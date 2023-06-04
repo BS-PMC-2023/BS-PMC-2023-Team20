@@ -4,7 +4,7 @@ describe('Signup Page', function() {
     });
   
     it('Allows a new user to sign up', function() {
-      cy.get('.emailInput input').type('testIntergration@example.com');
+      cy.get('.emailInput input').type('testIntergration@ac.sce.ac.il');
       cy.get('.PassWordInput input').type('testpassword');
       cy.get('.FnameInput input').type('Test');
       cy.get('.LnameInput input').type('User');
@@ -19,7 +19,7 @@ describe('Signup Page', function() {
     });
   
     it('Shows an error if the email is already in use', function() {
-      cy.get('.emailInput input').type('admin@example.com');
+      cy.get('.emailInput input').type('admin@ac.sce.ac.il');
       cy.get('.PassWordInput input').type('testpassword');
       cy.get('.FnameInput input').type('Test');
       cy.get('.LnameInput input').type('User');

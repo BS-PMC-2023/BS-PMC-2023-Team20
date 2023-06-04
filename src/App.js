@@ -1,6 +1,7 @@
 
 import './App.css';
 import React from "react";
+import ScrollToButton from './Components/ScrollToButton/ScrollToButton';
 import Navbar from './Components/Navbar/Navbar';
 import Home from './Components/Home/Home';
 import Footer from './Components/Footer/Footer';
@@ -13,6 +14,8 @@ import Myorders from './Components/Myorders/Myorders';
 import ProtectedRoute from './Permissions/ProtectedRoute';
 import { fetchUserData } from './utils/fetchLocalStorageData';
 import Confirmation from './Components/Confirmation/Confirmation';
+import SignProtected from './Permissions/SignProtected';
+
 
 
 function App() {
@@ -36,6 +39,7 @@ function App() {
       <Router>
       <>
       <Navbar/>
+      
       <div className = 'content'>
         <Routes>
           <Route element={<ProtectedRoute user={Logedin} />}>
@@ -44,7 +48,10 @@ function App() {
 
         <Route path="/Sign-up" element={<Signup />} />     
 
-        <Route path="/Sign-in" element={<Signin />} />     
+        <Route element={<SignProtected user={Logedin} />}>
+          <Route path="/Sign-in" element={<Signin />} />     
+        </Route>
+     
 
           <Route element={<ProtectedRoute user={Logedin} />}>
             <Route path="Order" element={<Order />} />    
@@ -58,10 +65,12 @@ function App() {
           <Route path="Admin" element={<Admin />} />
           <Route path="Confirmation" element={<Confirmation />} />
         </Route>
-
+        <Route path="*" element={<ProtectedRoute user={Logedin}/>}/>
         </Routes>
+        
       </div>
       <Footer/>
+      <ScrollToButton/>
       </>
       </Router>
 

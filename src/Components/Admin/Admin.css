@@ -10,6 +10,7 @@
   --inputColor: rgb(239, 239, 239);
   --bodyColor: rgb(240, 240, 246);
   --cardBG: rgb(225, 225, 235);
+  --redcolor: linear-gradient(to right, hsl(8, 85%, 43%),hsl(0, 100%, 33%));
 }
 :root .main {
   width: 100%;
@@ -115,6 +116,23 @@
 }
 :root .main .header .activeaddbar {
   top: -10rem;
+}
+:root .main .btndel {
+  padding: 0.6rem 1.5rem;
+  background: var(--redcolor);
+  border: none;
+  outline: none;
+  border-radius: 3rem;
+  cursor: pointer;
+  margin-top: 5rem;
+  color: var(--whiteColor);
+  font-weight: 1000;
+  font-size: medium;
+  margin: 5px;
+}
+:root .main .btndel .icon {
+  align-self: center;
+  font-size: 25px;
 }
 :root .main .btn {
   margin-top: 5rem;

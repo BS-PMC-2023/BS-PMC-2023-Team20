@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import './Admin.css'
 import { HiOutlineLocationMarker } from 'react-icons/hi'
 import { AiFillCloseCircle } from 'react-icons/ai'
@@ -24,41 +24,66 @@ const Admin = () => {
   const [Serial, setSerial] = useState("");
   const [Description, setDescription] = useState("");
   const [Reservations, setReservations] = useState([]);
-
-
+  const [emailError, setEmailError] = useState('');
+  const fileInputRef = useRef(null);
   const [Items, setItems] = useState([]);
   const ItemsRef = collection(db, "items")
 
   const [Currentitem, setCurrentitem] = useState(null)
 
-  //uploadImage
   const handleImageChange = (e) => {
+
     if (e.target.files[0]) {
-      const file = e.target.files[0]
+
+      const file = e.target.files[0];
       const reader = new FileReader();
 
-
       reader.onload = (event) => {
-        console.log(event.target.result); // logs the file bits
-        const fileData = event.target.result;
-        const dataView = new DataView(fileData);
-        const signature = dataView.getUint16(0, true);
-        if (signature === 0x5A4D) { // "MZ" signature in little-endian format
-          alert('Please select a JPEG or PNG image file. you try to uploud an exe file');
-          setImgSrc(null);
-          return;
+        try {
+          console.log(event.target.result); // logs the file bits
+          const fileData = event.target.result;
+          const dataView = new DataView(fileData);
+          const signature = dataView.getUint16(0);
+          const signatureHex = signature.toString(16); // Convert to hexadecimal string
+          console.log(signatureHex);
+          if (signatureHex === "4d5a") { // "MZ" signature in little-endian format
+            if (fileInputRef.current) {
+              fileInputRef.current.value = null; // Reset the file input field
+              setImgSrc('');
+            }
+            throw new Error('You are trying to upload an exe file.');
+          }
+          console.log(file.type);
+          if (file.type !== 'image/jpeg' && file.type !== "image/png") {
+            if (fileInputRef.current) {
+              fileInputRef.current.value = null; // Reset the file input field
+              setImgSrc('');
+            }
+            throw new Error('Please select a JPEG or PNG image file');
+          }
+          setEmailError('');
+          setImgSrc(file);
+        } catch (error) {
+          console.log(error.message);
+          if (error.message === 'You are trying to upload an exe file.') {
+            setEmailError('You are trying to upload an exe file.');
+            setTimeout(() => {
+              setEmailError('');
+            }, 5000);
+          }
+          if (error.message === 'Please select a JPEG or PNG image file') {
+            setEmailError('Please select a JPEG or PNG image file');
+            setTimeout(() => {
+              setEmailError('');
+            }, 5000);
+          }
         }
       };
       reader.readAsArrayBuffer(file);
-
-      if (file.type !== 'image/jpeg') {
-        alert('Please select a JPEG or PNG image file');
-        setImgSrc(null);
-        return;
-      };
-      setImgSrc(file);
     }
   }
+
+
 
 
   const onChange = (event) => {
@@ -112,7 +137,10 @@ const Admin = () => {
 
   // field clean
   const clearinput = () => {
-    setImgSrc('');
+    if (fileInputRef.current) {
+      fileInputRef.current.value = null; // Reset the file input field
+      setImgSrc('');
+    }
     setSerial('');
     setLocation('');
     setDescription('');
@@ -142,7 +170,7 @@ const Admin = () => {
     } else {
       setCurrentitem(null);
       setItemType("");
-      setImgSrc("");
+      setImgSrc(null);
       setLocation("");
       setSerial("");
       setDescription("");
@@ -150,12 +178,26 @@ const Admin = () => {
     }
     setActive('addBar activeaddbar');
   };
-  
+
   //function to remove addbar
   const removeaddbar = () => {
     clearinput();
     setActive('addBar')
   }
+
+
+  const renderEmailError = () => {
+    if (emailError) {
+      return (
+        <div className="error-notification">
+          <div className="error-bubble">
+            {emailError}
+          </div>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <section id='main' className='main section container'>
@@ -168,7 +210,7 @@ const Admin = () => {
 
 
       <button id='addbtn' className='btn flex' onClick={showadd}>ADD <GrFormAdd className="icon" /> </button>
-      <h1>{ }</h1>
+      <br></br>
       {/* menu for adding flights*/}
       <header className="header flex">
         <div className={active} data-testid='add-bar'>
@@ -193,7 +235,7 @@ const Admin = () => {
           <div className="addItem">
             <label htmlFor="imgSrc">Choose image:</label>
             <div className="input flex">
-              <input type="file" onChange={handleImageChange} data-testid="Choose image:" />
+              <input type="file" onChange={handleImageChange} data-testid="Choose image:" ref={fileInputRef} />
             </div>
           </div>
 
@@ -238,7 +280,7 @@ const Admin = () => {
           <button onClick={removeaddbar} className="cancel">
             <AiFillCloseCircle className="icon" />
           </button>
-
+          {renderEmailError()}
         </div>
       </header>
 
@@ -273,9 +315,10 @@ const Admin = () => {
 
                   <div id='card_btn'>
                     <button className='btn flex' onClick={() => showadd(item)}>EDIT <HiClipboardList className="icon" /> </button>
-                    <button className='btn flex' onClick={() => Deleteitems(item.uuid)}>DELETE <HiClipboardList className="icon" /> </button>
+                    <button className='btndel flex' onClick={() => Deleteitems(item.uuid)}>DELETE <HiClipboardList className="icon" /> </button>
                   </div>
                 </div>
+
               </div>
 
             )

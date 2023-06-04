@@ -50,6 +50,8 @@
   margin: auto;
   color: var(--whiteColor);
   z-index: 100;
+  justify-content: center;
+  align-items: center;
 }
 .Sign-in .Sign-inContent .textDiv {
   padding: 2rem e0;
@@ -68,6 +70,9 @@
   background: var(--whiteColor);
   border-radius: 10px;
   gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 .Sign-in .Sign-inContent .cardDiv label {
   display: block;
@@ -87,6 +92,7 @@
 }
 .Sign-in .Sign-inContent .cardDiv .input {
   height: 40px;
+  width: 100%;
   padding: 0 1rem;
   background: var(--inputColor);
   border-radius: 3rem;
@@ -142,19 +148,22 @@
   position: relative;
   font-size: 13px;
   font-weight: 500;
+  
 }
-.Sign-in .Sign-inContent .forgot-password {
-  color: hsl(240, 4%, 36%);
-  position: absolute;
+.Sign-in .Sign-inContent .cardDiv .forgot-password {
+  display: flex;
+  color: var(--whiteColor);
   background: var(--gradientColor);
-  bottom: -1.5rem;
-  -moz-column-gap: 0.8rem;
-       column-gap: 0.8rem;
-  padding: 1px 0.5rem;
+  padding: 5px 1rem;
   border-radius: 3rem;
-  left: 45%;
-  transform: translate(-50%);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  width: 70%;
   justify-content: center;
+  align-items: center;
+  margin: 0 auto;
 }
 .Sign-in .Sign-inContent .forgot-password:hover {
   background: var(--PrimaryColor);
@@ -326,19 +335,18 @@
   }
   .error-notification {
     position: fixed;
-    top: 100%;
-    left: 2rem;
-    transform: translateY(-50%);
+    top: 270px;
+    left: 9%;
+    transform: translateX(-50%);
     z-index: 9999;
   }
   
   .error-bubble {
-    background-color: red;
-    color: white;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff6b6b;
+    color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
-  
-
 }/*# sourceMappingURL=Signin.css.map */
