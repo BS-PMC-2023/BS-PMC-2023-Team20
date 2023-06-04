@@ -160,7 +160,7 @@
 }
 .Sign-up .Sign-upContent .cardDiv Label {
   display: block;
-  color: var(--textColor);
+  color: hsl(240, 4%, 36%);
   padding-bottom: 10px;
   font-size: 13px;
   font-weight: 500;
@@ -296,20 +296,5 @@
   }
   .home .homeContent .cardDiv .searchOptions span {
     font-size: 17px;
-  }
-  .error-notification {
-    position: fixed;
-    top: 100%;
-    left: 2rem;
-    transform: translateY(-50%);
-    z-index: 9999;
-  }
-  
-  .error-bubble {
-    background-color: red;
-    color: white;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
   }
 }/*# sourceMappingURL=Signup.css.map */

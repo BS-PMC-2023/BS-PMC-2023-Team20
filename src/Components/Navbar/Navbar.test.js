@@ -66,4 +66,14 @@ describe('Navbar', () => {
         expect(wrapper.find('button.btn').at(1).text()).toEqual('Sign-up');
         expect(wrapper.find('Link[to="/Logout"]').length).toEqual(0);
       });
+
+      // check if the logo link navigates to the correct route
+it('navigates to the home route when logo is clicked', () => {
+  const wrapper = shallow(<Navbar />);
+  const logoLink = wrapper.find('Link[to="/"]');
+  expect(logoLink.prop('to')).toEqual('/');
+});
+
   });
+
+  
