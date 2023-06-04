@@ -122,18 +122,21 @@ const Order = () => {
   }, [user,Reservations,FromDate,ReturnDate,item]);
 
 
-  const fetchItems=async()=>{
-    const q = query(collection(db, "reservations"), where("Itemid", "==", item.id));
+  const fetchItems = async () => {
+    const q = query(collection(db, "reservations"), 
+                    where("Itemid", "==", item.id),
+                    where("Status", "==", "Accept"));
     const data = await getDocs(q);
     const reservations = data.docs.map((doc) => doc.data());
     setReservations(reservations);
-
+  
     const fetchedDatePairs = reservations.map((reservation) => ({
       fromDate: new Date(reservation.FromDate),
       returnDate: new Date(reservation.ReturnDate),
     }));
     setDatePairs(fetchedDatePairs);
   }
+  
 
   let navigate = useNavigate();
 
