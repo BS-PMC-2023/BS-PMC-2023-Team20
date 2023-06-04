@@ -10,7 +10,7 @@
     --inputColor: rgb(239, 239, 239);
     --bodyColor: rgb(240, 240, 246);
     --cardBG: rgb(225, 225, 235);
-
+    --redcolor: linear-gradient(to right, hsl(8, 85%, 43%),hsl(0, 100%, 33%)); 
 .main{
     input[type=file]{
         cursor: pointer !important;
@@ -114,6 +114,7 @@
                 padding: .5rem 0; //on the wide screen padding should be :0 1rem\
                 .addItem{
                     padding: .5rem 0;
+                    
                 }
                 .btn{
                     margin-top: 1rem; //on the wide screen margin-left should be 1rem
@@ -131,7 +132,25 @@
 
 
     }
-    
+    .btndel{
+        padding: .6rem 1.5rem;
+        background: var(--redcolor);
+        border: none;
+        outline: none;
+        border-radius: 3rem;
+        cursor: pointer;
+        margin-top: 5rem;
+        color: var(--whiteColor);
+        font-weight: 1000;
+        font-size: medium;
+        margin: 5px;
+        .icon{
+            align-self: center;
+            font-size: 25px;
+        }
+
+    }
+
     .btn{
         margin-top: 5rem;
         color: var(--whiteColor);
