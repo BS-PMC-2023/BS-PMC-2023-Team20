@@ -21,6 +21,8 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 import Terms from "../Terms/Terms";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import emailjs from 'emailjs-com';
+
 
 const Order = () => {
   const { state: item } = useLocation();
@@ -142,6 +144,23 @@ const Order = () => {
 
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+  const sendEmailNotification = () => {
+    const templateParams = {
+      to_email: 'scewarehouse01@gmail.com',
+      subject: 'New Reservation Notification',
+      body: `A new reservation has been made on your site. Click the link to view details: http://localhost:3000/Confirmation`,
+    };
+  
+    emailjs.send('service_n0fn62v', 'template_gm2u9sn', templateParams, '9ABZeedZEMB4Gg5ad')
+      .then((response) => {
+        console.log('Email sent successfully:', response.text);
+      })
+      .catch((error) => {
+        console.error('Error sending email:', error);
+      });
+  };
+  
+
   const handleSubmit = async () => {
     if (isChecked === false) {
       alert("Please accept the terms and conditions");
@@ -189,7 +208,7 @@ const Order = () => {
         reservations: [...userData.reservations, ruid],
       });
     }
-  
+    sendEmailNotification();
     await sleep(1000);
     navigate("/Myorders");
   };
@@ -209,12 +228,10 @@ const Order = () => {
   
 
   const handleFromDateChange = (date) => {
-    console.log(date);
     const timeZoneOffset = date.getTimezoneOffset() * 60000; // Time zone offset in milliseconds
     const adjustedDate = new Date(date.getTime() - timeZoneOffset); // Adjust the date to the local time zone
     const formattedDate = adjustedDate.toISOString().slice(0, 10);
     setFromDate(formattedDate);
-    console.log(formattedDate);
   };
 
   const handleReturnDateChange = (date) => {
@@ -222,7 +239,6 @@ const Order = () => {
     const adjustedDate = new Date(date.getTime() - timeZoneOffset); // Adjust the date to the local time zone
     const formattedDate = adjustedDate.toISOString().slice(0, 10);
     setReturnDate(formattedDate);
-    console.log(formattedDate);
   };
 
 
@@ -371,10 +387,10 @@ const Order = () => {
             </div>
             <div>
           </div>
-         <button className="btn" onClick={handleSubmit}>
+
+        </div>         <button className="btn" onClick={handleSubmit}>
   Submit
 </button>
-        </div>
       </div>
     </section>
 

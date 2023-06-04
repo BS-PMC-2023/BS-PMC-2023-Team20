@@ -11,6 +11,7 @@
     "aos": "^2.3.4",
     "chromedriver": "^112.0.1",
     "dompurify": "^3.0.3",
+    "emailjs-com": "^3.2.0",
     "enzyme": "^3.11.0",
     "es6-promise": "^4.2.8",
     "file-type": "^18.4.0",
