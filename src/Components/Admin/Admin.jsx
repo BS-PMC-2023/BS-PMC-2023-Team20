@@ -210,7 +210,7 @@ const Admin = () => {
 
 
       <button id='addbtn' className='btn flex' onClick={showadd}>ADD <GrFormAdd className="icon" /> </button>
-      <h1>{ }</h1>
+      <br></br>
       {/* menu for adding flights*/}
       <header className="header flex">
         <div className={active} data-testid='add-bar'>
@@ -315,7 +315,7 @@ const Admin = () => {
 
                   <div id='card_btn'>
                     <button className='btn flex' onClick={() => showadd(item)}>EDIT <HiClipboardList className="icon" /> </button>
-                    <button className='btn flex' onClick={() => Deleteitems(item.uuid)}>DELETE <HiClipboardList className="icon" /> </button>
+                    <button className='btndel flex' onClick={() => Deleteitems(item.uuid)}>DELETE <HiClipboardList className="icon" /> </button>
                   </div>
                 </div>
 

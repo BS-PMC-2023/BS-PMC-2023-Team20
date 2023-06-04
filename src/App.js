@@ -1,6 +1,7 @@
 
 import './App.css';
 import React from "react";
+import ScrollToButton from './Components/ScrollToButton/ScrollToButton';
 import Navbar from './Components/Navbar/Navbar';
 import Home from './Components/Home/Home';
 import Footer from './Components/Footer/Footer';
@@ -36,6 +37,7 @@ function App() {
       <Router>
       <>
       <Navbar/>
+      
       <div className = 'content'>
         <Routes>
           <Route element={<ProtectedRoute user={Logedin} />}>
@@ -60,8 +62,10 @@ function App() {
         </Route>
         <Route path="*" element={<ProtectedRoute user={Logedin}/>}/>
         </Routes>
+        
       </div>
       <Footer/>
+      <ScrollToButton/>
       </>
       </Router>
 
