@@ -198,7 +198,7 @@
 }
 .home .homeContent .cardDiv Label {
   display: block;
-  color: var(--textColor);
+  color: hsl(240, 4%, 36%);
   padding-bottom: 10px;
   font-size: 13px;
   font-weight: 500;
