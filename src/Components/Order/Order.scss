@@ -107,18 +107,8 @@
       
       }
       
-      .savecard{
-        margin:0.7rem; 
-        box-shadow: 0px 14px 80px rgb(34 35 58 / 20%);
-        background-color:var(--inputColor);
-        width: 7rem;
-        border-radius: 15px;
-        padding: 5px;
-        text-align:center;
-      }
-      .checkmark{
-        margin:0.1rem;
-      }
+
+
   .secContent{
     justify-content: center;
     gap: 1.5rem;
@@ -144,65 +134,13 @@
                 }
             }
         }
-        .Date{
-            height: 40px;
-            width: 6rem;
-            padding: 0 1rem;
-            background: var(--whiteColor);
-            border-radius: 3rem;
-        }
-        .cvc{
-            height: 40px;
-            width: 6rem;
-            padding: 0 1rem;
-            background: var(--whiteColor);
-            border-radius: 3rem;
-        }
-        .CardNumber{
-            height: 40px;
-            width: 25rem;
-            padding: 0 1rem;
-            background: var(--whiteColor);
-            border-radius: 3rem;
-        }
-        .inputorder{
-            height: 40px;
-            padding: 0 1rem;
-            background: var(--whiteColor);
-            border-radius: 3rem;
-            
-         
-            input{
-                background: none;
-                border: none;
-                outline: none;
-                width: 100%;
-                font-size: 13px;
-                font-weight: 500;
-                &::placeholder{
-                    font-size: 13px;
-                }
-                
-            }
-        }
+
+
+
         
       
     }
 
-    .Orderdetails{
-        
-        position: fixed;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: none;
-        width: 30%;
-        height: var(--headerHeight);
-        z-index: 1000;
-        padding: 2rem;
-
-    
-    }
 }
 }
 

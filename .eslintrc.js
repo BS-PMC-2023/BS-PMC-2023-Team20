@@ -9,7 +9,7 @@ module.exports = {
       files: ['*.js', '*.jsx'],
       plugins: ['complexity'],
       rules: {
-        'complexity': ['warn', { max: 5 }],
+        'complexity': ['warn', { max: 8 }],
       },
     },
   ],

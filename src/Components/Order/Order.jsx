@@ -1,5 +1,5 @@
 import "./Order.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Aos from "aos";
@@ -19,7 +19,8 @@ import { db } from "../../firebase-config";
 import { AiFillCloseCircle } from 'react-icons/ai'
 
 import Terms from "../Terms/Terms";
-
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 const Order = () => {
   const { state: item } = useLocation();
@@ -32,7 +33,12 @@ const Order = () => {
   const [amount, setAmount] = useState(1);
   const [names, setNames] = useState([]);
   
-  
+  const [Reservations, setReservations] = useState([]);
+  const [datePairs, setDatePairs] = useState([]);
+
+  const FromDateRef = useRef(); 
+  const ReturnDateRef = useRef(); 
+
   const [active, setActive] = useState("TermsBar");
   const showTerms = () => {
     setNumClicks(numClicks + 1);
@@ -105,11 +111,32 @@ const Order = () => {
     }
   }
 
-  useEffect(() => {
+  useEffect(() => {  
+    FromDateRef.current=FromDate;
+    ReturnDateRef.current=ReturnDate;
     Aos.init({ duration: 4000 });
+    fetchItems();
 
-    console.log(item);
-  }, [user]);
+
+
+  }, [user,Reservations,FromDate,ReturnDate,item]);
+
+
+  const fetchItems = async () => {
+    const q = query(collection(db, "reservations"), 
+                    where("Itemid", "==", item.id),
+                    where("Status", "==", "Accept"));
+    const data = await getDocs(q);
+    const reservations = data.docs.map((doc) => doc.data());
+    setReservations(reservations);
+  
+    const fetchedDatePairs = reservations.map((reservation) => ({
+      fromDate: new Date(reservation.FromDate),
+      returnDate: new Date(reservation.ReturnDate),
+    }));
+    setDatePairs(fetchedDatePairs);
+  }
+  
 
   let navigate = useNavigate();
 
@@ -141,8 +168,8 @@ const Order = () => {
         LastName: userData.LastName,
         Userid: userUid,
         Itemid: item.uuid,
-        FromDate: FromDate,
-        ReturnDate: ReturnDate,
+        FromDate: FromDateRef.current,
+        ReturnDate: ReturnDateRef.current,
         Status: "Pending",
         timeStamp: serverTimestamp(),
       });
@@ -166,6 +193,43 @@ const Order = () => {
     await sleep(1000);
     navigate("/Myorders");
   };
+
+
+  const getDatesInRange = (startDate, endDate) => {
+    const dates = [];
+    let currentDate = new Date(startDate);
+  
+    while (currentDate <= endDate) {
+      dates.push(new Date(currentDate));
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+  
+    return dates;
+  };
+  
+
+  const handleFromDateChange = (date) => {
+    console.log(date);
+    const timeZoneOffset = date.getTimezoneOffset() * 60000; // Time zone offset in milliseconds
+    const adjustedDate = new Date(date.getTime() - timeZoneOffset); // Adjust the date to the local time zone
+    const formattedDate = adjustedDate.toISOString().slice(0, 10);
+    setFromDate(formattedDate);
+    console.log(formattedDate);
+  };
+
+  const handleReturnDateChange = (date) => {
+    const timeZoneOffset = date.getTimezoneOffset() * 60000; // Time zone offset in milliseconds
+    const adjustedDate = new Date(date.getTime() - timeZoneOffset); // Adjust the date to the local time zone
+    const formattedDate = adjustedDate.toISOString().slice(0, 10);
+    setReturnDate(formattedDate);
+    console.log(formattedDate);
+  };
+
+
+  const disabledDates = datePairs.flatMap(({ fromDate, returnDate }) =>
+  getDatesInRange(fromDate, returnDate)
+);
+
 
   return (
     <section id="main" className="main section container">
@@ -200,14 +264,15 @@ const Order = () => {
                   <div className="DepartInput">
                     <label htmlFor="date">From:</label>
                     <div className="input flex">
-                      <input
-                        type="date"
-                        value={FromDate}
-                        min={new Date().toISOString().slice(0, 10)}
-                        onChange={(event) => {
-                          setFromDate(event.target.value);
-                        }}
-                      />
+                    <DatePicker
+        selected={FromDate ? new Date(FromDate) : null}
+        onChange={handleFromDateChange}
+        dateFormat="yyyy-MM-dd"
+        minDate={new Date()}
+        placeholderText="Select a date"
+        excludeDates={disabledDates}
+
+      />
                     </div>
                   </div>
                 </div>
@@ -215,16 +280,17 @@ const Order = () => {
                 <div className="ReturnInput">
                   <label htmlFor="date">Return:</label>
                   <div className="input flex">
-                    <input
-                      type="date"
-                      value={ReturnDate}
-                      min={FromDate}
-                      onChange={(event) => {
-                        setReturnDate(event.target.value);
-                      }}
-                    />
+                <DatePicker
+  selected={ReturnDate ? new Date(ReturnDate) : null}
+  onChange={handleReturnDateChange}
+  dateFormat="yyyy-MM-dd"
+  minDate={FromDate ? new Date(FromDate) : new Date()}
+  placeholderText="Select a date"
+  excludeDates={disabledDates}
+/>    
                   </div>
                 </div>
+
                 {FromDate && ReturnDate && (
                   <div>
                     <p>
@@ -237,6 +303,7 @@ const Order = () => {
                   </div>
                 )}
                 <div>
+ 
   <div className="form-group">
     <label htmlFor="amount-select">Number of group members:   </label>
     <select
@@ -270,6 +337,9 @@ const Order = () => {
     </>
   )}
 </div>
+
+ 
+
               </form>
               
               <div className="checkbox-container">  
@@ -286,9 +356,7 @@ const Order = () => {
     I agree to the terms and conditions.
   </p>
 </div>
-
-
-
+          <div>
               <header className="header flex">
                 <div className={active}>
                   <Terms />
@@ -296,21 +364,16 @@ const Order = () => {
                   <AiFillCloseCircle className="icon" />
                 </div>  
                 </div>
-                
               </header>
-              <div>
-                <button className="btn">
-                  <a
-                    onClick={() => {
-                      handleSubmit();
-                    }}
-                  >
-                    Submit
-                  </a>
-                </button>
               </div>
+              </div>
+              
             </div>
+            <div>
           </div>
+         <button className="btn" onClick={handleSubmit}>
+  Submit
+</button>
         </div>
       </div>
     </section>
