@@ -339,4 +339,19 @@
   .home .Vid{
     height: 80%;
   }
+  .FromInput{
+    color:black;
+  }
+  .Description{
+    height: 40px;
+  padding: 0 1rem;
+  background: var(--inputColor);
+  border-radius: 3rem;
+  }
+  .optionalStar {
+    display: inline-block;
+    font-size: 12px;
+    color: #000000; /* Adjust the color as desired */
+    margin-left: 5px;
+  }
 }/*# sourceMappingURL=Home.css.map */
