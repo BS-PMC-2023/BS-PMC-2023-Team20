@@ -28,4 +28,26 @@ describe('Home Page', () => {
         
       });
   });
+
+  it('should set the description search term correctly', () => {
+
+
+    cy.get('select').select(5);
+
+    cy.get('.Description') // based on the class name in your component
+      .type('ac2')
+      .should('have.value', 'ac2')
+
+    cy.get('.searchOptions').click();
+    cy.wait(6000);
+
+
+    cy.get('.singleDestination').each(($item) => {
+        cy.wrap($item).within(() => {
+          cy.get('.desc').should('contain', 'Description:');
+        });
+      }).then(() => {
+
+      });
+  });
 });
