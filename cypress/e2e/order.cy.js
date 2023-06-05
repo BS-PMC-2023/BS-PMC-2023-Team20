@@ -21,10 +21,8 @@ describe('Order Component', () => {
     cy.get('#terms-checkbox').check({ force: true });
 
 
-    cy.get('button.btn2').contains("Submit").click();
-    cy.wait(3000);
-    cy.url().should('include', 'http://localhost:3000/Myorders').then(() => {
-      // Test ended
+    cy.get('button.btn2').contains("Submit").click().then(() => {
+      cy.url().should('include', 'http://localhost:3000/Myorders');
     });
     
   });
