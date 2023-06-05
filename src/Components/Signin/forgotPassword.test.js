@@ -11,7 +11,7 @@ describe('My Component', () => {
         <Signin />
       </MemoryRouter>
     );
-    const button = screen.getByText('here');
+    const button = screen.getByText('Forgot Password');
     expect(button).toBeInTheDocument();
   });
 });

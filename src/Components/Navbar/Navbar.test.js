@@ -29,7 +29,7 @@ describe('Navbar component when user is not logged in', () => {
     });
     
     it('displays correct logo text', () => {
-    expect(wrapper.find('h1').text()).toEqual('Warehouse.');
+    expect(wrapper.find('h1').text()).toEqual(' Warehouse.');
     });
     
     it('toggles navbar when toggleNavbar button is clicked', () => {
