@@ -51,65 +51,73 @@ const Navbar = () => {
     };
 
     return (
-<section id='Navbar'  className='Navbar'>
-    <header className="header flex">
-    <div className="logoDiv">
-  <Link to="/" className="logo">
-    <h1>
-      <SCEicon className="icon" data-testid="logo" />
-      <span className="logo-text">                 Warehouse.</span>
-    </h1>
-  </Link>
-</div>
-        <div className={active}>
-                    <ul onClick={removeNavbar} className="navLists flex">
-
-                        <li className="navItem">
-                            <a href="/" className="navLink">Home</a>
-                        </li>
-
-                        {user && userData && userData.userRoles.includes('admin') &&
-                        <li className="navItem">
-                            <a href="admin" className="navLink">admin</a>
-                            <a href="Confirmation" className="navLink">Confirmation Page</a>
-                        </li>}
-
-                        {user && userData? (
-                            <>
-                                <li className="navItem">
-                                    <a href="Myorders" className="navLink">My Orders</a>
-                                </li>
-                                <li className="navItem">
-                                    <a> Hello: {userData.FirstName}</a>
-                                </li>
-                                <button className="btn"
-                                    onClick={logout}> Log out
-                                </button>
-                                </>
-                            
-                        ):(
-                            <>
-                            <button className="btn">
-                                <Link to="/Sign-in">Sign-in</Link>
-                            </button>
-
-                            <button className="btn">
-                                <Link to="/Sign-up">Sign-up</Link>
-                            </button></>
-                        )}
-
-                    </ul>
-                    <div onClick={removeNavbar} className="closeNavbar">
-                        <AiFillCloseCircle className="icon" />
-                    </div>
-                </div>       
-                
-                <div onClick={showNav} className="toggleNavbar">
-                    <TbGridDots className="icon" />
-                </div>
-            </header>
+        <section id="Navbar" className="Navbar">
+          <header className="header flex">
+            <div className="logoDiv">
+              <Link to="/" className="logo">
+                <h1>
+                  <SCEicon className="icon" data-testid="logo" />
+                  <span className="logo-text"> Warehouse.</span>
+                </h1>
+              </Link>
+            </div>
+            <div className={active}>
+              <ul onClick={removeNavbar} className="navLists flex">
+                <li className="navItem">
+                  <a href="/" className="navLink">Home</a>
+                </li>
+      
+                {user && userData && userData.userRoles.includes('admin') && (
+                  <>
+                    <li className="navItem">
+                      <a href="admin" className="navLink">admin</a>
+                    </li>
+                    <li className="navItem">
+                      <a href="Confirmation" className="navLink">Confirmation Page</a>
+                    </li>
+                  </>
+                )}
+      
+                {user && userData ? (
+                  <>
+                    <li className="navItem">
+                      <a href="Myorders" className="navLink">My Orders</a>
+                    </li>
+                    <li className="navItem">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Hello: {userData.FirstName}
+                    </li>
+                    <button className="btn" onClick={logout}> Log out </button>
+                  </>
+                ) : (
+                  <>
+                    <button className="btn">
+                      <Link to="/Sign-in">Sign-in</Link>
+                    </button>
+                    <button className="btn">
+                      <Link to="/Sign-up">Sign-up</Link>
+                    </button>
+                  </>
+                )}
+              </ul>
+              <div onClick={removeNavbar} className="closeNavbar">
+                <AiFillCloseCircle className="icon" />
+              </div>
+            </div>
+            <div onClick={showNav} className="toggleNavbar">
+              <TbGridDots className="icon" />
+            </div>
+          </header>
         </section>
-    )
+      );
+      
 }
 
 export default Navbar
