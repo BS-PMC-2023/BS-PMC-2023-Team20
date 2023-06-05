@@ -17,6 +17,8 @@ const Home = () => {
 
 
   const [ItemType,setItemType] = useState(null);
+  const [descriptionSearchTerm, setDescriptionSearchTerm] = useState("");
+
 
 
   useEffect(()=>{
@@ -30,7 +32,8 @@ const Home = () => {
   
   const SetSearch = () => {
     setFilters(null); //reset old filters
-    setFilters([{ ItemType }]);
+    setFilters([{ ItemType }, { Description: descriptionSearchTerm }]);
+
   };
   
 
@@ -73,10 +76,14 @@ const Home = () => {
                   </select>
                   </div>
               </div>  
-
-    
-          
-            
+              <input
+                  className='Description'
+                  type="text"
+                  placeholder="Search by description (optional)"
+                  value={descriptionSearchTerm}
+                  onChange={(e) => setDescriptionSearchTerm(e.target.value)}
+                />
+                <span className="optionalStar">*Optional</span>
             <div className="searchOptions flex" onClick={SetSearch}>
               <span>Search</span>
               <AiOutlineSearch className="icon" />
