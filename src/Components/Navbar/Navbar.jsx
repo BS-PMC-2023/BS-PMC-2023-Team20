@@ -53,11 +53,14 @@ const Navbar = () => {
     return (
 <section id='Navbar'  className='Navbar'>
     <header className="header flex">
-        <div className="logoDiv">
-            <Link to="/" className="logo">
-                    <h1><SCEicon className="icon" data-testid="logo" />Warehouse.</h1>
-            </Link>
-        </div>
+    <div className="logoDiv">
+  <Link to="/" className="logo">
+    <h1>
+      <SCEicon className="icon" data-testid="logo" />
+      <span className="logo-text">                 Warehouse.</span>
+    </h1>
+  </Link>
+</div>
         <div className={active}>
                     <ul onClick={removeNavbar} className="navLists flex">
 

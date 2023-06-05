@@ -30,6 +30,10 @@
   align-items: center;
   justify-content: center;
 }
+.header .logo .logo-text {
+  margin-left: 10px;
+}
+
 .header .logo .icon {
   font-size: 25px;
   color: var(--PrimaryColor);
