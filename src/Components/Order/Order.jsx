@@ -21,7 +21,7 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 import Terms from "../Terms/Terms";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import emailjs from 'emailjs-com';
+import { sendEmailNotification } from "./sendEmailNotification";
 
 
 const Order = () => {
@@ -144,22 +144,6 @@ const Order = () => {
 
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  const sendEmailNotification = () => {
-    const templateParams = {
-      to_email: 'scewarehouse01@gmail.com',
-      subject: 'New Reservation Notification',
-      body: `A new reservation has been made on your site. Click the link to view details: http://localhost:3000/Confirmation`,
-    };
-  
-    emailjs.send('service_n0fn62v', 'template_gm2u9sn', templateParams, '9ABZeedZEMB4Gg5ad')
-      .then((response) => {
-        console.log('Email sent successfully:', response.text);
-      })
-      .catch((error) => {
-        console.error('Error sending email:', error);
-      });
-  };
-  
 
   const handleSubmit = async () => {
     if (isChecked === false) {
