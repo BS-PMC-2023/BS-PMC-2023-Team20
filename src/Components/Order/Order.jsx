@@ -125,8 +125,9 @@ const Order = () => {
 
 
   const fetchItems = async () => {
+    console.log(item.uuid);
     const q = query(collection(db, "reservations"), 
-                    where("Itemid", "==", item.id),
+                    where("Itemid", "==", item.uuid),
                     where("Status", "==", "Accept"));
     const data = await getDocs(q);
     const reservations = data.docs.map((doc) => doc.data());
@@ -137,6 +138,7 @@ const Order = () => {
       returnDate: new Date(reservation.ReturnDate),
     }));
     setDatePairs(fetchedDatePairs);
+    
   }
   
 
