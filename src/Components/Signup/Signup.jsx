@@ -58,7 +58,9 @@ const Signup = () => {
       const UserRef = doc(db, "users", user.user.uid);
       const data = await getDoc(UserRef);
       localStorage.setItem("user", JSON.stringify(data.data()));
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
       window.location.reload(false);
       setEmailError('');
     } catch (error) {

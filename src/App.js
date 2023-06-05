@@ -45,9 +45,9 @@ function App() {
           <Route element={<ProtectedRoute user={Logedin} />}>
             <Route path="/" element={<Home />} />     
           </Route>
-
-        <Route path="/Sign-up" element={<Signup />} />     
-
+        <Route element={<SignProtected user={Logedin} />}>
+         <Route path="/Sign-up" element={<Signup />} />     
+        </Route>
         <Route element={<SignProtected user={Logedin} />}>
           <Route path="/Sign-in" element={<Signin />} />     
         </Route>
