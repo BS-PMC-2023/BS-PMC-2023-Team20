@@ -66,6 +66,10 @@
 :root .main .checkbox-container {
   display: flex;
   align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
 }
 :root .main .checkbox-container label {
   position: relative;
@@ -137,4 +141,17 @@
   .secContent .singleDestination {
     height: auto;
   }
-}/*# sourceMappingURL=Order.css.map */
+}
+.btn2{
+  padding: .6rem 1.5rem;
+    background: var(--gradientColor);
+    border: none;
+    outline: none;
+    border-radius: 3rem;
+    cursor: pointer;
+    display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+}
+/*# sourceMappingURL=Order.css.map */

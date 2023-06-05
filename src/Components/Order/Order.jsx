@@ -260,19 +260,17 @@ const Order = () => {
 
         <div className="cardInfo">
           <h4 className="Title"> {item.ItemType}</h4>
-          <span className="continent flex">
-            <HiOutlineLocationMarker className="icon" />
-            <span className="name">Location: {item.Location}</span>
-          </span>
-
+          
+          <br></br>
           <div className="Sirel">
             <p>Serial: {item.Serial}</p>
           </div>
 
           <div className="desc">
             <p>Description: {item.Description}</p>
+            
           </div>
-
+          <br></br>
           <div>
             <div>
               <form className="card-form">
@@ -281,14 +279,14 @@ const Order = () => {
                     <label htmlFor="date">From:</label>
                     <div className="input flex">
                     <DatePicker
-        selected={FromDate ? new Date(FromDate) : null}
-        onChange={handleFromDateChange}
-        dateFormat="yyyy-MM-dd"
-        minDate={new Date()}
-        placeholderText="Select a date"
-        excludeDates={disabledDates}
+                      selected={FromDate ? new Date(FromDate) : null}
+                      onChange={handleFromDateChange}
+                      dateFormat="yyyy-MM-dd"
+                      minDate={new Date()}
+                      placeholderText="Select a date"
+                      excludeDates={disabledDates}
 
-      />
+                    />
                     </div>
                   </div>
                 </div>
@@ -297,20 +295,24 @@ const Order = () => {
                   <label htmlFor="date">Return:</label>
                   <div className="input flex">
                 <DatePicker
-  selected={ReturnDate ? new Date(ReturnDate) : null}
-  onChange={handleReturnDateChange}
-  dateFormat="yyyy-MM-dd"
-  minDate={FromDate ? new Date(FromDate) : new Date()}
-  placeholderText="Select a date"
-  excludeDates={disabledDates}
-/>    
+                  selected={ReturnDate ? new Date(ReturnDate) : null}
+                  onChange={handleReturnDateChange}
+                  dateFormat="yyyy-MM-dd"
+                  minDate={FromDate ? new Date(FromDate) : new Date()}
+                  placeholderText="Select a date"
+                  excludeDates={disabledDates}
+                />    
                   </div>
                 </div>
 
-                {FromDate && ReturnDate && (
-                  <div>
+              
+                <div>
+ 
+  <div className="form-group">
+  {FromDate && ReturnDate && (
+                  <div className="rd">
                     <p>
-                      Number of rent days:{" "}
+                      Rent days: {" "}
                       {Math.ceil(
                         (new Date(ReturnDate) - new Date(FromDate)) /
                           (1000 * 60 * 60 * 24)
@@ -318,10 +320,7 @@ const Order = () => {
                     </p>
                   </div>
                 )}
-                <div>
- 
-  <div className="form-group">
-    <label htmlFor="amount-select">Number of group members:   </label>
+    <label htmlFor="amount-select"> Number of group members:   </label>
     <select
       id="amount-select"
       className="form-select"
@@ -352,12 +351,13 @@ const Order = () => {
       ))}
     </>
   )}
+  
 </div>
 
  
 
               </form>
-              
+              <br></br>
               <div className="checkbox-container">  
   <label htmlFor="terms-checkbox">
     <input
@@ -381,16 +381,17 @@ const Order = () => {
                 </div>  
                 </div>
               </header>
-              </div>
-              </div>
               
+              </div><br></br>
+            <br></br>
+            <button className="btn2"  onClick={handleSubmit}>Submit</button>
+              </div>
+              <br></br>
             </div>
             <div>
           </div>
 
-        </div>         <button className="btn" onClick={handleSubmit}>
-  Submit
-</button>
+        </div>         
       </div>
     </section>
 
