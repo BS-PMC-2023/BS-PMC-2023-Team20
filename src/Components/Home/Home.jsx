@@ -16,7 +16,7 @@ const Home = () => {
   const [Filters, setFilters] = useState(null);
 
 
-  const [ItemType, setItemType] = useState(null);
+  const [ItemType,setItemType] = useState(null);
 
 
   useEffect(() => {
@@ -37,7 +37,8 @@ const Home = () => {
       behavior: 'smooth' // You can use 'auto' for instant scrolling
     });
     setFilters(null); //reset old filters
-    setFilters([{ ItemType }]);
+    setFilters([{ ItemType }, { Description: descriptionSearchTerm }]);
+
   };
 
 
@@ -66,26 +67,28 @@ const Home = () => {
         <div data-aos="fade-down" className="cardDiv grid">
 
           <div className="FromInput">
-            <label htmlFor="ticketsAmount">choose item type:</label>
-            <div className="input flex">
-              <select onChange={onChange}>
-                <option value="1">Camera</option>
-                <option value="2">Recording studio</option>
-                <option value="3">Projector</option>
-                <option value="4">Apple</option>
-                <option value="5">Tripod</option>
-                <option value="6">Cables</option>
-                <option value="7">Lights</option>
-                <option value="7">Convertors</option>
-              </select>
+                <label htmlFor="ticketsAmount">choose item type:</label>
+                  <div className="input flex">
+                  <select onChange={onChange}>
+                  <option value="1">Camera</option>
+                  <option value="2">Recording studio</option>
+                  <option value="3">Projector</option>
+                  <option value="4">Apple</option>
+                  <option value="5">Tripod</option>
+                  <option value="6">Cables</option>
+                  <option value="7">Lights</option>
+                  <option value="7">Convertors</option>
+                  </select>
+                  </div>
+              </div>  
+
+    
+          
+            
+            <div className="searchOptions flex" onClick={SetSearch}>
+              <span>Search</span>
+              <AiOutlineSearch className="icon" />
             </div>
-          </div>
-
-
-          <div className="searchOptions flex" onClick={SetSearch}>
-            <span>Search</span>
-            <AiOutlineSearch className="icon" />
-          </div>
 
           <div className="ResetsearchOptions flex" onClick={ResetSetSearch}>
             <span >Show All</span>
