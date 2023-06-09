@@ -29,38 +29,30 @@ const Main = ({ Filters }) => {
 
   async function fetchItems() {
     try {
-      let itemQuery = ItemsRef;
-  
-      if (Filters && Filters[0] && Filters[0].ItemType) {
-        itemQuery = query(itemQuery, where("ItemType", "==", Filters[0].ItemType));
+      // Fetch all items
+      const data = await getDocs(ItemsRef);
+      const itemsData = data.docs.map((doc) => doc.data());
+
+      let filteredItems = itemsData;
+
+      if (Filters) {
+        // Filter by ItemType
+        if (Filters[0] && Filters[0].ItemType) {
+          filteredItems = filteredItems.filter(item => item.ItemType === Filters[0].ItemType);
+        }
+
+        // Filter by Description
+        if (Filters[1] && Filters[1].Description) {
+          const searchTerm = Filters[1].Description.toLowerCase().trim();
+          filteredItems = filteredItems.filter(item => item.Description.toLowerCase().includes(searchTerm));
+        }
       }
-  
-      if (Filters && Filters[1] && Filters[1].Description) {
-        const searchTerm = Filters[1].Description.toLowerCase().trim();
-  
-        itemQuery = query(itemQuery, where("Description", "==", searchTerm));
-  
-        const data = await getDocs(itemQuery);
-        const itemsData = data.docs.map((doc) => doc.data());
-  
-        // Filter the items further to match the substring
-        const filteredItems = itemsData.filter((item) =>
-          item.Description.toLowerCase().includes(searchTerm)
-        );
-  
-        console.log("Retrieved items: ", filteredItems);
-        setItems(filteredItems);
-      } else {
-        const data = await getDocs(itemQuery);
-        const itemsData = data.docs.map((doc) => doc.data());
-        console.log("Retrieved items: ", itemsData);
-        setItems(itemsData);
-      }
+
+      setItems(filteredItems);
     } catch (error) {
       console.error("Error fetching items: ", error);
     }
   }
-  
 
   const Order = async (item) => {
     navigate("Order", { state: item });
